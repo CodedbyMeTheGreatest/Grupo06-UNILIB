@@ -1,0 +1,3 @@
+C:\app\56958\product\21c\dbhomeXE\network\admin\listener.ora
+C:\app\56958\product\21c\dbhomeXE\network\admin\sample\listener.ora
+C:\app\56958\product\21c\homes\OraDB21Home1\network\admin\listener.ora
