@@ -80,3 +80,45 @@ body {
     margin-top: 7rem;
   }
 }
+
+/* Paleta institucional UNILIB */
+:root {
+  --unilib-primary: #1A3A5C;      /* Azul marino */
+  --unilib-secondary: #2E75B6;    /* Azul botones */
+  --unilib-bg: #FFFFFF;             /* Fondo general */
+  --unilib-panel: #F5F5F5;        /* Paneles secundarios */
+  --unilib-success: #1FFF26;      /* Éxito */
+  --unilib-danger: #C0392B;       /* Error/Alerta */
+  --unilib-warning: #EDF723;      /* Advertencia */
+}
+
+/* Navbar institucional */
+.navbar-dark.bg-dark {
+  background-color: var(--unilib-primary) !important;
+}
+
+/* Botones primarios */
+.btn-primary {
+  background-color: var(--unilib-secondary);
+  border-color: var(--unilib-secondary);
+}
+
+/* Feature icons */
+.feature-icon {
+  transition: transform 0.3s ease;
+}
+.feature-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Accesibilidad: contraste mínimo 4.5:1 */
+body {
+  color: #333; /* Buen contraste sobre blanco */
+}
+
+/* Responsividad mínima 360px */
+@media (max-width: 360px) {
+  .carousel-caption h1 {
+    font-size: 1.5rem;
+  }
+}

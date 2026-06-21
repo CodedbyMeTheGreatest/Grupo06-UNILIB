@@ -174,8 +174,7 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand p-0 me-2" href="#">
-          <img src="Logo-removebg-preview.png" alt="Logo Uróboros y el Ojo que todo lo ve" width="50" height="50"
-            class="d-inline-block align-text-top" style="margin-top: -10px; margin-bottom: -10px;">
+          <img src="logo-unilib.png" alt="Logo UNILIB - Sistema de Gestión Bibliotecaria" width="60" height="60">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -183,14 +182,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Estudiante</a>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="#">Docente</a></li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Administrador</a>
-            </li>
+            <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="#catalogo">Catálogo</a></li>
+            <li class="nav-item"><a class="nav-link" href="#prestamos">Préstamos</a></li>
+            <li class="nav-item"><a class="nav-link" href="#reservas">Reservas</a></li>
           </ul>
+          <a href="#login" class="btn btn-primary me-2" style="background-color: #2E75B6; border-color: #2E75B6;">
+            Acceder con Cuenta Institucional
+          </a>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" />
             <button class="btn btn-outline-success d-flex align-items-center justify-content-center" type="submit"
@@ -220,12 +219,14 @@
             style="height: 100vh; object-fit: cover; filter: brightness(0.7);" alt="Templo griego antiguo">
           <div class="container">
             <div class="carousel-caption text-start">
-              <h1>Bienvenido</h1>
+              <h1>Bienvenido a UNILIB</h1>
               <p class="opacity-75">
-                Nuestro templo del conocimiento está a tu alcance con un par de clics.
+                El nuevo portal digital de la Biblioteca Central. Diseñado para modernizar tu experiencia académica,
+                permitiéndote gestionar préstamos, realizar reservas y consultar el catálogo desde cualquier
+                dispositivo.
               </p>
               <p>
-                <a class="btn btn-lg btn-primary" href="#">Ingresar</a>
+                <a class="btn btn-lg btn-primary" href="#login">Ingresar al Portal</a>
               </p>
             </div>
           </div>
@@ -236,12 +237,12 @@
             alt="Erudito griego escribiendo en papiro">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Únete a nuestra comunidad</h1>
+              <h1>Acceso Institucional Directo</h1>
               <p>
-                Regístrate de manera gratuita y ten a tu alcance nuestro vasto catálogo de libros, audiolibros, videos y
-                más.
+                Sin registros adicionales. Accede de forma segura y al instante utilizando tu cuenta institucional
+                (SSO/LDAP). Tu perfil se activa automáticamente al estar matriculado o contratado.
               </p>
-              <p><a class="btn btn-lg btn-primary" href="#">Registrarse</a></p>
+              <p><a class="btn btn-lg btn-primary" href="#login">Acceder con tu Cuenta</a></p>
             </div>
           </div>
         </div>
@@ -251,13 +252,13 @@
             alt="Monumental biblioteca antigua con papiros">
           <div class="container">
             <div class="carousel-caption text-end">
-              <h1>Explora libremente</h1>
+              <h1>Catálogo Inteligente en Línea</h1>
               <p>
-                Nuestros catálogos te esperan. Maravíllate con la infinita sabiduría y las historias que aguardan por
-                ti.
+                Encuentra lo que buscas en tiempo real. Filtra por ISBN, autor, título o categoría con metadatos
+                completos y portadas enriquecidas. Reserva ejemplares físicos al instante.
               </p>
               <p>
-                <a class="btn btn-lg btn-primary" href="#">Catálogo completo</a>
+                <a class="btn btn-lg btn-primary" href="#catalogo">Explorar Catálogo</a>
               </p>
             </div>
           </div>
@@ -278,144 +279,184 @@
     <div class="container marketing">
       <!-- Three columns of text below the carousel -->
       <div class="row">
-        <div class="col-lg-4">
-          <img src="MarcoAurelio.png" class="bd-placeholder-img rounded-circle" width="140" height="140"
-            style="object-fit: cover;" alt="Rostro de Marco Aurelio">
-          <h2 class="fw-normal">Meditaciones</h2>
-          <p>
-            Marco Aurelio, emperador romano y filósofo estoico, escribió Meditaciones como un cuaderno íntimo no
-            destinado a la publicación, buscando ofrecer al lector (a sí mismo, en origen) un recordatorio constante
-            para vivir con virtud, razón y serenidad. Es una obra compuesta por reflexiones personales que exploran la
-            muerte, la naturaleza universal y el dominio del juicio interior. En esencia, es un manual atemporal de
-            resiliencia que enseña a mantener la paz interior frente a la adversidad.
-          </p>
-          <p>
-            <a class="btn btn-secondary" href="#">Leer más &raquo;</a>
-          </p>
+        <!-- Feature 1: Catálogo -->
+        <div class="col-lg-4 text-center">
+          <div class="feature-icon mx-auto mb-3" style="width: 80px; height: 80px; background-color: #2E75B6; border-radius: 50%; 
+                      display: flex; align-items: center; justify-content: center;">
+            <svg width="40" height="40" fill="white" viewBox="0 0 16 16">
+              <path
+                d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.933-.575-2.22-.821-3.297-.709-.548.057-1.08.16-1.538.3v-9.4c.279-.108.539-.214.758-.3.503-.2 1.054-.4 1.629-.448.946-.08 1.916.146 2.462.659l.716.667-.715.666c-.545.513-1.516.738-2.462.658-.575-.047-1.126-.247-1.629-.447-.22-.086-.48-.192-.758-.3v9.402c.458-.14 1.08-.243 1.63-.3.125-.012.247-.022.368-.03z" />
+              <path fill-rule="evenodd"
+                d="M13.78 2.1c-.513-.48-1.565-.662-2.63-.568-.534.047-1.016.228-1.396.44-.187.105-.336.22-.443.307-.106-.088-.256-.202-.443-.308-.38-.211-.862-.392-1.396-.44-1.065-.094-2.117.089-2.63.57a.5.5 0 0 0-.15.362v9.557a.5.5 0 0 0 .768.422C5.97 11.83 7.6 12 8 12s2.03-.17 3.252-.734a.5.5 0 0 0 .748-.422V2.462a.5.5 0 0 0-.15-.362zM9 3.284c.289-.255.761-.507 1.416-.508.513.001 1.013.111 1.429.274v9.395c-.352-.108-.772-.193-1.22-.193-.72 0-1.42.175-1.925.462V3.284z" />
+            </svg>
+          </div>
+          <h2 class="fw-normal">Catálogo en Línea</h2>
+          <p>Busca libros por <strong>ISBN, autor, título o categoría</strong>.
+            Consulta <strong>disponibilidad en tiempo real</strong> y reserva ejemplares no disponibles.</p>
+          <p><a class="btn btn-secondary" href="#">Explorar catálogo &raquo;</a></p>
         </div>
         <!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="Petrarca.png" class="bd-placeholder-img rounded-circle" width="140" height="140"
-            style="object-fit: cover;" alt="Retrato de Francesco Petrarca">
-          <h2 class="fw-normal">Sonetos y Canciones</h2>
-          <p>
-            Francesco Petrarca, poeta y humanista del siglo XIV, escribió esta obra como un cancionero en verso que
-            buscaba explorar la naturaleza del amor, el dolor y la belleza a través de la figura idealizada de Laura. Es
-            una colección de poesía lírica que marca el inicio del Renacimiento literario, donde los sonetos y canciones
-            desarrollan un complejo análisis psicológico del amante. El libro se erige como un modelo perdurable de
-            introspección amorosa que transforma el sufrimiento en arte refinado.
-          </p>
-          <p>
-            <a class="btn btn-secondary" href="#">Leer más &raquo;</a>
-          </p>
+
+        <!-- Feature 2: Préstamos -->
+        <div class="col-lg-4 text-center">
+          <div class="feature-icon mx-auto mb-3" style="width: 80px; height: 80px; background-color: #2E75B6; border-radius: 50%;
+                      display: flex; align-items: center; justify-content: center;">
+            <svg width="40" height="40" fill="white" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+              <path
+                d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1-1v1H1V2a2 2 0 0 1 2-2z" />
+              <path
+                d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+            </svg>
+          </div>
+          <h2 class="fw-normal">Préstamos y Reservas</h2>
+          <p>Solicita préstamos con <strong>fechas de devolución automáticas</strong>.
+            Recibe <strong>alertas por email/SMS</strong> antes del vencimiento.</p>
+          <p><a class="btn btn-secondary" href="#">Gestionar préstamos &raquo;</a></p>
         </div>
         <!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="MaximoGorki.png" class="bd-placeholder-img rounded-circle" width="140" height="140"
-            style="object-fit: cover;" alt="Retrato de Máximo Gorki">
-          <h2 class="fw-normal">La madre</h2>
-          <p>
-            Máximo Gorki, novelista y dramaturgo ruso fundamental del realismo socialista, escribió esta novela con el
-            propósito de retratar el despertar político y espiritual de los oprimidos, mostrando cómo una mujer humilde
-            se transforma en revolucionaria. Es una obra que narra la conversión de Pelagia Nilovna, una madre sumisa,
-            en luchadora consciente a través del activismo de su hijo en la Rusia prerrevolucionaria. El libro se erige
-            como un himno a la solidaridad obrera y a la capacidad de rebelión frente a la injusticia, un hito en la
-            literatura de compromiso social.
-          </p>
-          <p>
-            <a class="btn btn-secondary" href="#">Leer más &raquo;</a>
-          </p>
+
+        <!-- Feature 3: Reportes -->
+        <div class="col-lg-4 text-center">
+          <div class="feature-icon mx-auto mb-3" style="width: 80px; height: 80px; background-color: #2E75B6; border-radius: 50%;
+                      display: flex; align-items: center; justify-content: center;">
+            <svg width="40" height="40" fill="white" viewBox="0 0 16 16">
+              <path
+                d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z" />
+            </svg>
+          </div>
+          <h2 class="fw-normal">Reportes y Estadísticas</h2>
+          <p>Genera reportes de <strong>libros más prestados</strong> y <strong>usuarios más activos</strong>.
+            Exporta en <strong>PDF o Excel</strong> para la toma de decisiones.</p>
+          <p><a class="btn btn-secondary" href="#">Ver reportes &raquo;</a></p>
         </div>
         <!-- /.col-lg-4 -->
       </div>
       <!-- /.row -->
       <!-- START THE FEATURETTES -->
       <hr class="featurette-divider" />
+      <!-- Featurette 1: Préstamos -->
       <div class="row featurette">
         <div class="col-md-7">
           <h2 class="featurette-heading fw-normal lh-1">
-            First featurette heading.
-            <span class="text-body-secondary">It’ll blow your mind.</span>
+            Préstamos en minutos, <span class="text-body-secondary">no en horas</span>
           </h2>
           <p class="lead">
-            Some great placeholder content for the first featurette here.
-            Imagine some exciting prose here.
+            Solicita préstamos de libros físicos con <strong>generación automática de fechas de devolución</strong>.
+            El sistema verifica tu estado de cuenta y envía confirmación por email.
           </p>
+          <ul class="list-unstyled">
+            <li>✅ Validación automática de disponibilidad</li>
+            <li>✅ Fechas que evitan fines de semana y feriados</li>
+            <li>✅ Alertas por email/SMS antes del vencimiento</li>
+            <li>✅ Completa el proceso en menos de 5 minutos</li>
+          </ul>
         </div>
         <div class="col-md-5">
-          <svg aria-label="Placeholder: 500x500"
-            class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" height="500"
-            preserveAspectRatio="xMidYMid slice" role="img" width="500" xmlns="http://www.w3.org/2000/svg">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect>
-            <text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">
-              500x500
-            </text>
-          </svg>
+          <img src="prestamos-unilib.png" alt="Estudiante realizando préstamo en sistema UNILIB"
+            class="bd-placeholder-img-lg featurette-image img-fluid mx-auto rounded">
         </div>
       </div>
-      <hr class="featurette-divider" />
+
+      <hr class="featurette-divider">
+
+      <!-- Featurette 2: Catálogo -->
       <div class="row featurette">
         <div class="col-md-7 order-md-2">
           <h2 class="featurette-heading fw-normal lh-1">
-            Oh yeah, it’s that good.
-            <span class="text-body-secondary">See for yourself.</span>
+            Catálogo inteligente, <span class="text-body-secondary">información enriquecida</span>
           </h2>
           <p class="lead">
-            Another featurette? Of course. More placeholder content here to
-            give you an idea of how this layout would work with some actual
-            real-world content in place.
+            Búsqueda avanzada con filtros por ISBN, autor, título, editorial y categoría.
+            Integración con <strong>bases de datos bibliográficas (Z39.50/OAI-PMH)</strong> para metadatos completos.
           </p>
+          <ul class="list-unstyled">
+            <li>🔍 Búsqueda básica en máximo 3 clicks</li>
+            <li>📚 Metadatos externos: portadas, sinopsis, descripciones</li>
+            <li>📊 Disponibilidad en tiempo real por sede</li>
+            <li>🔔 Reserva de libros no disponibles con notificación</li>
+          </ul>
         </div>
         <div class="col-md-5 order-md-1">
-          <svg aria-label="Placeholder: 500x500"
-            class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" height="500"
-            preserveAspectRatio="xMidYMid slice" role="img" width="500" xmlns="http://www.w3.org/2000/svg">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect>
-            <text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">
-              500x500
-            </text>
-          </svg>
+          <img src="catalogo-unilib.png" alt="Interfaz de catálogo UNILIB con búsqueda avanzada"
+            class="bd-placeholder-img-lg featurette-image img-fluid mx-auto rounded">
         </div>
       </div>
-      <hr class="featurette-divider" />
+
+      <hr class="featurette-divider">
+
+      <!-- Featurette 3: Reportes -->
       <div class="row featurette">
         <div class="col-md-7">
           <h2 class="featurette-heading fw-normal lh-1">
-            And lastly, this one.
-            <span class="text-body-secondary">Checkmate.</span>
+            Reportes para decisiones, <span class="text-body-secondary">informadas y oportunas</span>
           </h2>
           <p class="lead">
-            And yes, this is the last block of representative placeholder
-            content. Again, not really intended to be actually read, simply
-            here to give you a better view of what this would look like with
-            some actual content. Your content.
+            Genera reportes estadísticos sobre el uso del sistema. Identifica
+            <strong>libros más prestados</strong>, <strong>usuarios más activos</strong> y tendencias de uso mensual.
           </p>
+          <ul class="list-unstyled">
+            <li>📈 Gráficos de barras y tablas exportables</li>
+            <li>📄 Exportación en PDF y Excel</li>
+            <li>📅 Filtros por fechas y categorías</li>
+            <li>🗄️ Retención automática de reportes por 1 año</li>
+          </ul>
         </div>
         <div class="col-md-5">
-          <svg aria-label="Placeholder: 500x500"
-            class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" height="500"
-            preserveAspectRatio="xMidYMid slice" role="img" width="500" xmlns="http://www.w3.org/2000/svg">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect>
-            <text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">
-              500x500
-            </text>
-          </svg>
+          <img src="reportes-unilib.png" alt="Dashboard de reportes estadísticos UNILIB"
+            class="bd-placeholder-img-lg featurette-image img-fluid mx-auto rounded">
         </div>
       </div>
       <hr class="featurette-divider" />
       <!-- /END THE FEATURETTES -->
     </div>
     <!-- /.container -->
+
+    <section class="metrics py-5" style="background-color: #1A3A5C; color: white;">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-md-3">
+            <h2 class="display-4 fw-bold">70%</h2>
+            <p>Mejora en experiencia de usuario</p>
+          </div>
+          <div class="col-md-3">
+            <h2 class="display-4 fw-bold">85/100</h2>
+            <p>Puntuación mínima de usabilidad</p>
+          </div>
+          <div class="col-md-3">
+            <h2 class="display-4 fw-bold">50%</h2>
+            <p>Aumento en devoluciones a tiempo</p>
+          </div>
+          <div class="col-md-3">
+            <h2 class="display-4 fw-bold">75%</h2>
+            <p>Personal usando reportes</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FOOTER -->
-    <footer class="container">
-      <p class="float-end"><a href="#">Back to top</a></p>
-      <p>
-        &copy; 2017–2025 Company, Inc. &middot;
-        <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
-      </p>
+    <footer class="container-fluid py-4" style="background-color: #1A3A5C; color: white;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>UNILIB</h5>
+            <p class="mb-1">Sistema de Gestión Bibliotecaria Universitaria</p>
+            <p class="small opacity-75">Biblioteca Central Universidad</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <a href="#" class="text-white me-3">Términos de Uso</a>
+            <a href="#" class="text-white me-3">Privacidad</a>
+            <a href="#" class="text-white me-3">Accesibilidad</a>
+            <a href="#" class="text-white">Soporte Técnico</a>
+          </div>
+        </div>
+        <hr style="border-color: rgba(255,255,255,0.2);">
+        <div class="text-center">
+          <p class="mb-0">© 2026 UNILIB - Biblioteca Central Universidad. Todos los derechos reservados.</p>
+        </div>
+      </div>
     </footer>
   </main>
   <script src="../assets/dist/js/bootstrap.bundle.min.js" class="astro-vvvwv3sm"></script>
