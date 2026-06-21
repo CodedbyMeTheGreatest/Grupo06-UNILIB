@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="es" data-bs-theme="auto">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+    content="UNILIB – Catálogo en Línea. Busca libros por ISBN, autor, título o categoría. Consulta disponibilidad en tiempo real y reserva ejemplares." />
+  <meta name="author" content="Grupo 06 – UNILIB" />
+  <title>Catálogo en Línea · UNILIB</title>
+  <link rel="canonical" href="#" />
+  <script src="../assets/js/color-modes.js"></script>
+  <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#2E75B6" />
+  <style>
+    /* ===== TOKENS ===== */
+    :root {
+      --unilib-blue:      #2E75B6;
+      --unilib-dark:      #1A3A5C;
+      --unilib-light-bg:  #f4f6f9;
+    }
+
+    body { font-family: 'Inter', sans-serif; background-color: var(--unilib-light-bg); }
+
+    /* ===== NAVBAR ===== */
+    .navbar-unilib { background-color: var(--unilib-dark) !important; box-shadow: 0 2px 10px rgba(0,0,0,.3); }
+
+    /* ===== HERO ===== */
+    .catalog-hero {
+      background: linear-gradient(135deg, #1A3A5C 0%, #2E75B6 60%, #4A90D9 100%);
+      padding: 3.5rem 0 2.5rem;
+      color: #fff;
+    }
+    .catalog-hero h1 { font-size: 2rem; font-weight: 700; }
+    .catalog-hero p  { opacity: .85; font-size: .97rem; }
+
+    /* ===== SEARCH CARD ===== */
+    .search-container {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,.1);
+      margin-top: -1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+    .search-input {
+      border: 2px solid #e0e7ff;
+      border-radius: 10px;
+      padding: .55rem 1rem;
+      font-size: .92rem;
+      transition: border-color .2s;
+    }
+    .search-input:focus { border-color: var(--unilib-blue); box-shadow: 0 0 0 3px rgba(46,117,182,.12); }
+
+    .btn-search {
+      background-color: var(--unilib-blue);
+      color: #fff; border: none;
+      border-radius: 10px;
+      padding: .55rem 1.4rem;
+      font-weight: 600;
+      transition: background-color .2s, transform .1s;
+    }
+    .btn-search:hover { background-color: var(--unilib-dark); color: #fff; transform: translateY(-1px); }
+
+    /* ===== FILTER CHIPS ===== */
+    .filter-chip {
+      background: #e8f0fb; color: var(--unilib-blue);
+      border: 1px solid #c5d9f1; border-radius: 20px;
+      padding: .28rem .85rem; font-size: .8rem; font-weight: 500;
+      cursor: pointer; transition: all .2s; text-decoration: none; display: inline-block;
+    }
+    .filter-chip:hover, .filter-chip.active {
+      background: var(--unilib-blue); color: #fff; border-color: var(--unilib-blue);
+    }
+
+    /* ===== BOOK CARD ===== */
+    .book-card {
+      background: #fff; border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      transition: transform .25s ease, box-shadow .25s ease;
+      overflow: hidden; border: none;
+    }
+    .book-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(46,117,182,.16); }
+
+    .book-cover {
+      height: 200px; display: flex;
+      align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+
+    /* availability pill */
+    .avail-pill {
+      position: absolute; top: 10px; right: 10px;
+      border-radius: 20px; padding: .22rem .65rem;
+      font-size: .72rem; font-weight: 700; letter-spacing: .02em;
+    }
+    .avail-disponible   { background: #d1fae5; color: #065f46; }
+    .avail-no-disponible{ background: #fee2e2; color: #991b1b; }
+    .avail-reservado    { background: #fef3c7; color: #92400e; }
+
+    .book-category {
+      font-size: .72rem; background: #e8f0fb; color: var(--unilib-blue);
+      border-radius: 6px; padding: .14rem .48rem;
+      display: inline-block; margin-bottom: .5rem;
+    }
+    .book-title  { font-size: .93rem; font-weight: 700; color: var(--unilib-dark); line-height: 1.3; margin-bottom: .18rem; }
+    .book-author { font-size: .8rem;  color: #6c757d; margin-bottom: .45rem; }
+    .book-meta   { font-size: .75rem; color: #9ca3af;  margin-bottom: .7rem; }
+
+    .btn-ver {
+      background: var(--unilib-blue); color: #fff; border: none;
+      border-radius: 8px; font-size: .8rem; font-weight: 600;
+      padding: .38rem .75rem; transition: background-color .2s;
+    }
+    .btn-ver:hover { background: var(--unilib-dark); color: #fff; }
+
+    .btn-reservar {
+      background: transparent; color: var(--unilib-blue);
+      border: 2px solid var(--unilib-blue); border-radius: 8px;
+      font-size: .8rem; font-weight: 600; padding: .28rem .75rem;
+      transition: all .2s;
+    }
+    .btn-reservar:hover { background: var(--unilib-blue); color: #fff; }
+    .btn-reservar:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ===== MODAL ===== */
+    .modal-header-unilib {
+      background: linear-gradient(135deg, #1A3A5C, #2E75B6);
+      color: #fff;
+    }
+    .modal-header-unilib .btn-close { filter: invert(1); }
+
+    /* ===== MISC ===== */
+    .results-info { font-size: .88rem; color: #6c757d; }
+    .page-link { color: var(--unilib-blue); }
+    .page-item.active .page-link { background-color: var(--unilib-blue); border-color: var(--unilib-blue); }
+    .form-select-sm { border: 2px solid #e0e7ff; border-radius: 8px; font-size: .84rem; }
+    .form-select-sm:focus { border-color: var(--unilib-blue); box-shadow: 0 0 0 3px rgba(46,117,182,.12); }
+
+    /* ===== BD-MODE TOGGLE (igual que menu) ===== */
+    .btn-bd-primary {
+      --bd-violet-bg: #2E75B6;
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #1A3A5C;
+      --bs-btn-hover-border-color: #1A3A5C;
+      --bs-btn-active-bg: #1A3A5C;
+      --bs-btn-active-border-color: #1A3A5C;
+    }
+    .bd-mode-toggle { z-index: 1500; }
+    .bd-mode-toggle .bi { width: 1em; height: 1em; }
+    .bd-mode-toggle .dropdown-menu .active .bi { display: block !important; }
+    .bi { vertical-align: -.125em; fill: currentColor; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== SVG SYMBOLS ===== -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <symbol id="check2" viewBox="0 0 16 16">
+      <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+    </symbol>
+    <symbol id="circle-half" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+    </symbol>
+    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+      <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
+      <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162z" />
+    </symbol>
+    <symbol id="sun-fill" viewBox="0 0 16 16">
+      <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+    </symbol>
+  </svg>
+
+  <!-- ===== THEME TOGGLE ===== -->
+  <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
+      aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+      <svg class="bi my-1 theme-icon-active" aria-hidden="true"><use href="#circle-half"></use></svg>
+      <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+      <li>
+        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+          <svg class="bi me-2 opacity-50" aria-hidden="true"><use href="#sun-fill"></use></svg>
+          Light
+          <svg class="bi ms-auto d-none" aria-hidden="true"><use href="#check2"></use></svg>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+          <svg class="bi me-2 opacity-50" aria-hidden="true"><use href="#moon-stars-fill"></use></svg>
+          Dark
+          <svg class="bi ms-auto d-none" aria-hidden="true"><use href="#check2"></use></svg>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+          <svg class="bi me-2 opacity-50" aria-hidden="true"><use href="#circle-half"></use></svg>
+          Auto
+          <svg class="bi ms-auto d-none" aria-hidden="true"><use href="#check2"></use></svg>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ===== NAVBAR (mismo estilo que menu/index.html) ===== -->
+  <header data-bs-theme="dark">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top navbar-unilib">
+      <div class="container-fluid">
+        <a class="navbar-brand p-0 me-2" href="../menu/index.html">
+          <img src="../menu/logo-unilib.png" alt="Logo UNILIB – Sistema de Gestión Bibliotecaria" width="60" height="60">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCatalogo"
+          aria-controls="navbarCatalogo" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCatalogo">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item"><a class="nav-link" href="../menu/index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Catálogo</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Préstamos</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Reservas</a></li>
+          </ul>
+          <a href="../menu/index.html#login" class="btn btn-primary me-2"
+            style="background-color:#2E75B6; border-color:#2E75B6;">
+            Acceder con Cuenta Institucional
+          </a>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" />
+            <button class="btn btn-outline-success d-flex align-items-center justify-content-center" type="submit"
+              aria-label="Search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main style="padding-top: 72px;">
+
+    <!-- ===== HERO BANNER ===== -->
+    <section class="catalog-hero">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <h1>
+              <svg width="32" height="32" viewBox="0 0 16 16" fill="white" class="me-2" style="vertical-align:-.1em;">
+                <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.933-.575-2.22-.821-3.297-.709-.548.057-1.08.16-1.538.3v-9.4c.279-.108.539-.214.758-.3.503-.2 1.054-.4 1.629-.448.946-.08 1.916.146 2.462.659l.716.667-.715.666c-.545.513-1.516.738-2.462.658z"/>
+                <path fill-rule="evenodd" d="M13.78 2.1c-.513-.48-1.565-.662-2.63-.568-.534.047-1.016.228-1.396.44-.187.105-.336.22-.443.307-.106-.088-.256-.202-.443-.308-.38-.211-.862-.392-1.396-.44-1.065-.094-2.117.089-2.63.57a.5.5 0 0 0-.15.362v9.557a.5.5 0 0 0 .768.422C5.97 11.83 7.6 12 8 12s2.03-.17 3.252-.734a.5.5 0 0 0 .748-.422V2.462a.5.5 0 0 0-.15-.362z"/>
+              </svg>
+              Catálogo en Línea
+            </h1>
+            <p class="mb-0">
+              Encuentra libros por <strong>título, autor, ISBN o categoría</strong>.
+              Consulta <strong>disponibilidad en tiempo real</strong> y reserva ejemplares al instante.
+            </p>
+          </div>
+          <div class="col-md-4 text-md-end mt-3 mt-md-0">
+            <span class="badge bg-light text-dark fs-6 px-3 py-2" id="heroBadge">
+              9 libros en el catálogo
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SEARCH & FILTERS CARD ===== -->
+    <div class="container">
+      <div class="search-container mb-4">
+        <div class="row g-3 align-items-end">
+
+          <!-- Búsqueda general -->
+          <div class="col-md-5">
+            <label class="form-label fw-semibold text-muted small mb-1">Búsqueda general</label>
+            <div class="input-group">
+              <span class="input-group-text bg-white" style="border:2px solid #e0e7ff; border-right:none; border-radius:10px 0 0 10px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#adb5bd" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </span>
+              <input type="text" id="searchInput" class="form-control search-input"
+                placeholder="Título, autor o ISBN…"
+                style="border-left:none; border-radius:0 10px 10px 0;" />
+            </div>
+          </div>
+
+          <!-- Categoría -->
+          <div class="col-md-2">
+            <label class="form-label fw-semibold text-muted small mb-1">Categoría</label>
+            <select id="filterCategoria" class="form-select form-select-sm" style="height:42px;">
+              <option value="">Todas</option>
+              <option value="Literatura">Literatura</option>
+              <option value="Filosofía">Filosofía</option>
+              <option value="Matemáticas">Matemáticas</option>
+              <option value="Ciencias">Ciencias</option>
+              <option value="Computación">Computación</option>
+              <option value="Economía">Economía</option>
+              <option value="Psicología">Psicología</option>
+              <option value="Historia">Historia</option>
+            </select>
+          </div>
+
+          <!-- Disponibilidad -->
+          <div class="col-md-2">
+            <label class="form-label fw-semibold text-muted small mb-1">Disponibilidad</label>
+            <select id="filterDisponibilidad" class="form-select form-select-sm" style="height:42px;">
+              <option value="">Todos</option>
+              <option value="Disponible">Disponible</option>
+              <option value="No disponible">No disponible</option>
+              <option value="Reservado">Reservado</option>
+            </select>
+          </div>
+
+          <!-- Botones -->
+          <div class="col-md-3 d-flex gap-2">
+            <button class="btn btn-search flex-grow-1" id="btnBuscar">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="me-1">
+                <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              Buscar
+            </button>
+            <button class="btn btn-outline-secondary" id="btnReset" title="Limpiar filtros" style="border-radius:10px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 .49-3.51"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick-filter chips -->
+        <div class="mt-3 d-flex flex-wrap gap-2 align-items-center">
+          <span class="text-muted small fw-semibold me-1">Filtrar por:</span>
+          <a class="filter-chip active" href="#" data-cat="">Todos</a>
+          <a class="filter-chip" href="#" data-cat="Literatura">Literatura</a>
+          <a class="filter-chip" href="#" data-cat="Filosofía">Filosofía</a>
+          <a class="filter-chip" href="#" data-cat="Matemáticas">Matemáticas</a>
+          <a class="filter-chip" href="#" data-cat="Ciencias">Ciencias</a>
+          <a class="filter-chip" href="#" data-cat="Computación">Computación</a>
+          <a class="filter-chip" href="#" data-cat="Economía">Economía</a>
+          <a class="filter-chip" href="#" data-cat="Psicología">Psicología</a>
+          <a class="filter-chip" href="#" data-cat="Historia">Historia</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== RESULTS BAR ===== -->
+    <div class="container mb-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <p class="results-info mb-0" id="resultsCount">
+        Mostrando <strong>9</strong> de 9 resultados
+      </p>
+      <div class="d-flex align-items-center gap-2">
+        <span class="text-muted small">Ordenar por:</span>
+        <select class="form-select form-select-sm" style="width:auto; border-radius:8px; font-size:.82rem; border:2px solid #e0e7ff;">
+          <option>Título A–Z</option>
+          <option>Título Z–A</option>
+          <option>Autor A–Z</option>
+          <option>Más recientes</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ===== BOOK GRID ===== -->
+    <div class="container mb-5">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="bookGrid">
+
+        <!-- Libro 1 -->
+        <div class="col book-item" data-categoria="Filosofía" data-disponibilidad="Disponible">
+          <div class="book-card card h-100">
+            <div class="book-cover" style="background: linear-gradient(135deg,#667eea,#764ba2);">
+              <svg viewBox="0 0 24 24" fill="white" width="72" height="72" opacity=".85">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              <span class="avail-pill avail-disponible">● Disponible</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <span class="book-category">Filosofía</span>
+              <h5 class="book-title">Meditaciones</h5>
+              <p class="book-author">Marco Aurelio</p>
+              <p class="book-meta">ISBN: 978-84-376-0494-9 · Gredos</p>
+              <div class="d-flex gap-2 mt-auto">
+                <button class="btn btn-ver flex-grow-1" data-bs-toggle="modal" data-bs-target="#modalLibro"
+                  data-titulo="Meditaciones" data-autor="Marco Aurelio" data-cat="Filosofía"
+                  data-disp="Disponible" data-isbn="978-84-376-0494-9" data-editorial="Gredos"
+                  data-grad="linear-gradient(135deg,#667eea,#764ba2)"
+                  data-desc="Reflexiones filosóficas del emperador romano sobre el estoicismo, el autodominio y la virtud. Una obra fundamental del pensamiento occidental."
+                  data-info="2 ejemplares disponibles en Biblioteca Central.">
+                  Ver detalles
+                </button>
+                <button class="btn btn-reservar">Reservar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Libro 2 -->
+        <div class="col book-item" data-categoria="Literatura" data-disponibilidad="No disponible">
+          <div class="book-card card h-100">
+            <div class="book-cover" style="background: linear-gradient(135deg,#f093fb,#f5576c);">
+              <svg viewBox="0 0 24 24" fill="white" width="72" height="72" opacity=".85">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              <span class="avail-pill avail-no-disponible">● No disponible</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <span class="book-category">Literatura</span>
+              <h5 class="book-title">El Alquimista</h5>
+              <p class="book-author">Paulo Coelho</p>
+              <p class="book-meta">ISBN: 978-84-08-04318-0 · Planeta</p>
+              <div class="d-flex gap-2 mt-auto">
+                <button class="btn btn-ver flex-grow-1" data-bs-toggle="modal" data-bs-target="#modalLibro"
+                  data-titulo="El Alquimista" data-autor="Paulo Coelho" data-cat="Literatura"
+                  data-disp="No disponible" data-isbn="978-84-08-04318-0" data-editorial="Planeta"
+                  data-grad="linear-gradient(135deg,#f093fb,#f5576c)"
+                  data-desc="La fábula sobre Santiago, un joven pastor andaluz que viaja desde España hasta el desierto de Egipto en busca de un tesoro enterrado."
+                  data-info="0 ejemplares disponibles. Puede hacer una reserva para cuando esté disponible.">
+                  Ver detalles
+                </button>
+                <button class="btn btn-reservar">Reservar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Libro 3 -->
+        <div class="col book-item" data-categoria="Matemáticas" data-disponibilidad="Disponible">
+          <div class="book-card card h-100">
+            <div class="book-cover" style="background: linear-gradient(135deg,#4facfe,#00f2fe);">
+              <svg viewBox="0 0 24 24" fill="white" width="72" height="72" opacity=".85">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              <span class="avail-pill avail-disponible">● Disponible</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <span class="book-category">Matemáticas</span>
+              <h5 class="book-title">Cálculo de una Variable</h5>
+              <p class="book-author">Thomas &amp; Finney</p>
+              <p class="book-meta">ISBN: 978-84-832-2398-1 · Addison-Wesley</p>
+              <div class="d-flex gap-2 mt-auto">
+                <button class="btn btn-ver flex-grow-1" data-bs-toggle="modal" data-bs-target="#modalLibro"
+                  data-titulo="Cálculo de una Variable" data-autor="Thomas &amp; Finney" data-cat="Matemáticas"
+                  data-disp="Disponible" data-isbn="978-84-832-2398-1" data-editorial="Addison-Wesley"
+                  data-grad="linear-gradient(135deg,#4facfe,#00f2fe)"
+                  data-desc="Texto clásico de cálculo diferencial e integral para cursos universitarios de ingeniería y ciencias. Incluye ejercicios aplicados."
+                  data-info="4 ejemplares disponibles en Biblioteca Central.">
+                  Ver detalles
+                </button>
+                <button class="btn btn-reservar">Reservar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Libro 4 -->
+        <div class="col book-item" data-categoria="Ciencias" data-disponibilidad="Disponible">
+          <div class="book-card card h-100">
+            <div class="book-cover" style="background: linear-gradient(135deg,#43e97b,#38f9d7);">
+              <svg viewBox="0 0 24 24" fill="white" width="72" height="72" opacity=".85">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              <span class="avail-pill avail-disponible">● Disponible</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <span class="book-category">Ciencias</span>
+              <h5 class="book-title">Física Universitaria Vol. 1</h5>
+              <p class="book-author">Young &amp; Freedman</p>
+              <p class="book-meta">ISBN: 978-60-758-5156-6 · Pearson</p>
+              <div class="d-flex gap-2 mt-auto">
+                <button class="btn btn-ver flex-grow-1" data-bs-toggle="modal" data-bs-target="#modalLibro"
+                  data-titulo="Física Universitaria Vol. 1" data-autor="Young &amp; Freedman" data-cat="Ciencias"
+                  data-disp="Disponible" data-isbn="978-60-758-5156-6" data-editorial="Pearson"
+                  data-grad="linear-gradient(135deg,#43e97b,#38f9d7)"
+                  data-desc="Introducción a la física para estudiantes de ciencias e ingeniería. Cubre mecánica clásica, termodinámica y ondas con enfoque experimental."
+                  data-info="3 ejemplares disponibles en Biblioteca Central.">
+                  Ver detalles
+                </button>
+                <button class="btn btn-reservar">Reservar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Libro 5 -->
+        <div class="col book-item" data-categoria="Literatura" data-disponibilidad="Disponible">
+          <div class="book-card card h-100">
+            <div class="book-cover" style="background: linear-gradient(135deg,#fa709a,#fee140);">
+              <svg viewBox="0 0 24 24" fill="white" width="72" height="72" opacity=".85">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              <span class="avail-pill avail-disponible">● Disponible</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <span class="book-category">Literatura</span>
+              <h5 class="book-title">Don Quijote de la Mancha</h5>
+              <p class="book-author">Miguel de Cervantes</p>
+              <p class="book-meta">ISBN: 978-84-376-0235-8 · RAE</p>
+              <div class="d-flex gap-2 mt-auto">
+                <button class="btn btn-ver flex-grow-1" data-bs-toggle="modal" data-bs-target="#modalLibro"
+                  data-titulo="Don Quijote de la Mancha" data-autor="Miguel de Cervantes" data-cat="Literatura"
+                  data-disp="Disponible" data-isbn="978-84-376-0235-8" data-editorial="RAE"
+                  data-grad="linear-gradient(135deg,#fa709a,#fee140)"
+                  data-desc="Novela cumbre de la literatura española y universal. Narra las aventuras del hidalgo Alonso Quijano, quien enloquece leyendo libros de caballerías."
+                  data-info="1 ejemplar disponible en Biblioteca Central.">
+                  Ver detalles
+                </button>
+                <button class="btn btn-reservar">Reservar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Libro 6 -->
+        <div class="col book-item" data-categoria="Computación" data-disponibilidad="No disponible">
+          <div class="book-card card h-100">
+            <div class="book-cover" style="background: linear-gradient(135deg,#5c6bc0,#26a69a);">
+              <svg viewBox="0 0 24 24" fill="white" width="72" height="72" opacity=".85">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              <span class="avail-pill avail-no-disponible">● No disponible</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <span class="book-category">Computación</span>
+              <h5 class="book-title">Introducción a los Algoritmos</h5>
+              <p class="book-author">Cormen, Leiserson, Rivest &amp; Stein</p>
+              <p class="book-meta">ISBN: 978-02-626-2546-2 · MIT Press</p>
+              <div class="d-flex gap-2 mt-auto">
+                <button class="btn btn-ver flex-grow-1" data-bs-toggle="modal" data-bs-target="#modalLibro"
+                  data-titulo="Introducción a los Algoritmos" data-autor="Cormen, Leiserson, Rivest &amp; Stein"
+                  data-cat="Computación" data-disp="No disponible" data-isbn="978-02-626-2546-2"
+                  data-editorial="MIT Press" data-grad="linear-gradient(135deg,#5c6bc0,#26a69a)"
+                  data-desc="Texto de referencia para el estudio de algoritmos y estructuras de datos. Ampliamente utilizado en programas de ciencias de la computación a nivel mundial."
+                  data-info="0 ejemplares disponibles. Puede hacer una reserva para cuando esté disponible.">
+                  Ver detalles
+                </button>
+                <button class="btn btn-reservar">Reservar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Libro 7 -->
+        <div class="col book-item" data-categoria="Economía" data-disponibilidad="Reservado">
+          <div class="book-card card h-100">
+            <div class="book-cover" style="background: linear-gradient(135deg,#ffecd2,#fcb69f);">
+              <svg viewBox="0 0 24 24" fill="white" width="72" height="72" opacity=".85">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              <span class="avail-pill avail-reservado">● Reservado</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <span class="book-category">Economía</span>
+              <h5 class="book-title">Principios de Economía</h5>
+              <p class="book-author">N. Gregory Mankiw</p>
+              <p class="book-meta">ISBN: 978-84-978-8002-9 · Cengage Learning</p>
+              <div class="d-flex gap-2 mt-auto">
+                <button class="btn btn-ver flex-grow-1" data-bs-toggle="modal" data-bs-target="#modalLibro"
+                  data-titulo="Principios de Economía" data-autor="N. Gregory Mankiw" data-cat="Economía"
+                  data-disp="Reservado" data-isbn="978-84-978-8002-9" data-editorial="Cengage Learning"
+                  data-grad="linear-gradient(135deg,#ffecd2,#fcb69f)"
+                  data-desc="Introducción a la micro y macroeconomía. Texto estándar en programas de economía, administración y negocios. Enfoque intuitivo con casos reales."
+                  data-info="0 ejemplares disponibles. Este libro está en lista de espera.">
+                  Ver detalles
+                </button>
+                <button class="btn btn-reservar" disabled>En espera</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Libro 8 -->
+        <div class="col book-item" data-categoria="Psicología" data-disponibilidad="Disponible">
+          <div class="book-card card h-100">
+            <div class="book-cover" style="background: linear-gradient(135deg,#a18cd1,#fbc2eb);">
+              <svg viewBox="0 0 24 24" fill="white" width="72" height="72" opacity=".85">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              <span class="avail-pill avail-disponible">● Disponible</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <span class="book-category">Psicología</span>
+              <h5 class="book-title">Psicología General</h5>
+              <p class="book-author">Charles G. Morris</p>
+              <p class="book-meta">ISBN: 978-97-007-3012-7 · Pearson</p>
+              <div class="d-flex gap-2 mt-auto">
+                <button class="btn btn-ver flex-grow-1" data-bs-toggle="modal" data-bs-target="#modalLibro"
+                  data-titulo="Psicología General" data-autor="Charles G. Morris" data-cat="Psicología"
+                  data-disp="Disponible" data-isbn="978-97-007-3012-7" data-editorial="Pearson"
+                  data-grad="linear-gradient(135deg,#a18cd1,#fbc2eb)"
+                  data-desc="Introducción completa a la psicología contemporánea, cubriendo percepción, aprendizaje, memoria, motivación, emoción y psicología social."
+                  data-info="2 ejemplares disponibles en Biblioteca Central.">
+                  Ver detalles
+                </button>
+                <button class="btn btn-reservar">Reservar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Libro 9 -->
+        <div class="col book-item" data-categoria="Historia" data-disponibilidad="Disponible">
+          <div class="book-card card h-100">
+            <div class="book-cover" style="background: linear-gradient(135deg,#d4fc79,#96e6a1);">
+              <svg viewBox="0 0 24 24" fill="white" width="72" height="72" opacity=".85">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              <span class="avail-pill avail-disponible">● Disponible</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <span class="book-category">Historia</span>
+              <h5 class="book-title">Historia Universal Contemporánea</h5>
+              <p class="book-author">Edward McNall Burns</p>
+              <p class="book-meta">ISBN: 978-96-826-8168-1 · Siglo XXI</p>
+              <div class="d-flex gap-2 mt-auto">
+                <button class="btn btn-ver flex-grow-1" data-bs-toggle="modal" data-bs-target="#modalLibro"
+                  data-titulo="Historia Universal Contemporánea" data-autor="Edward McNall Burns"
+                  data-cat="Historia" data-disp="Disponible" data-isbn="978-96-826-8168-1"
+                  data-editorial="Siglo XXI" data-grad="linear-gradient(135deg,#d4fc79,#96e6a1)"
+                  data-desc="Obra de referencia sobre la historia moderna y contemporánea del mundo occidental. Analiza las grandes transformaciones políticas, económicas y culturales."
+                  data-info="3 ejemplares disponibles en Biblioteca Central.">
+                  Ver detalles
+                </button>
+                <button class="btn btn-reservar">Reservar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /#bookGrid -->
+
+      <!-- SIN RESULTADOS -->
+      <div id="noResults" class="text-center py-5 d-none">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#adb5bd" stroke-width="1.5" class="mb-3">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <h5 class="text-muted">No se encontraron resultados</h5>
+        <p class="text-muted small">Intenta con otros términos o ajusta los filtros.</p>
+        <button class="btn btn-search mt-2" id="btnResetNo">Limpiar filtros</button>
+      </div>
+    </div><!-- /.container -->
+
+    <!-- ===== PAGINACIÓN ===== -->
+    <div class="container mb-5" id="paginationContainer">
+      <nav aria-label="Paginación del catálogo">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">»</a></li>
+        </ul>
+      </nav>
+    </div>
+
+  </main><!-- /main -->
+
+  <!-- ===== MODAL DETALLE LIBRO ===== -->
+  <div class="modal fade" id="modalLibro" tabindex="-1" aria-labelledby="modalLibroLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg" style="border-radius:16px; overflow:hidden;">
+        <div class="modal-header modal-header-unilib border-0 pb-3">
+          <h5 class="modal-title fw-bold" id="modalLibroLabel">Detalle del libro</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="row g-4">
+            <!-- Portada -->
+            <div class="col-md-4 text-center">
+              <div id="modalCover"
+                style="height:210px; border-radius:14px; display:flex; align-items:center; justify-content:center;">
+                <svg viewBox="0 0 24 24" fill="white" width="80" height="80" opacity=".85">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+              </div>
+              <div class="mt-3">
+                <span id="modalDisponibilidadBadge" class="badge fs-6 px-3 py-2 rounded-pill"></span>
+              </div>
+            </div>
+            <!-- Info -->
+            <div class="col-md-8">
+              <span id="modalCategoria" class="book-category"></span>
+              <h4 id="modalTitulo" class="fw-bold mt-2 mb-1" style="color:#1A3A5C;"></h4>
+              <p id="modalAutor" class="text-muted mb-1"></p>
+              <p id="modalISBN" class="text-muted small mb-3"></p>
+              <p id="modalDesc" style="font-size:.9rem; color:#495057; line-height:1.6;"></p>
+              <div id="modalInfo" class="alert mb-0" style="border-radius:10px; font-size:.85rem;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-0 bg-light px-4 py-3">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-reservar" id="modalBtnReservar"
+            style="border:2px solid #2E75B6; color:#2E75B6;">
+            📋 Agregar a lista de espera
+          </button>
+          <button type="button" class="btn btn-ver" id="modalBtnPrestar"
+            style="background:#2E75B6; color:#fff;">
+            📚 Solicitar préstamo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER (mismo que menu/index.html) ===== -->
+  <footer class="container-fluid py-4" style="background-color:#1A3A5C; color:white;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>UNILIB</h5>
+          <p class="mb-1">Sistema de Gestión Bibliotecaria Universitaria</p>
+          <p class="small opacity-75">Biblioteca Central Universidad</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <a href="#" class="text-white me-3">Términos de Uso</a>
+          <a href="#" class="text-white me-3">Privacidad</a>
+          <a href="#" class="text-white me-3">Accesibilidad</a>
+          <a href="#" class="text-white">Soporte Técnico</a>
+        </div>
+      </div>
+      <hr style="border-color:rgba(255,255,255,.2);">
+      <div class="text-center">
+        <p class="mb-0">© 2026 UNILIB – Biblioteca Central Universidad. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    /* ===================================================
+       FILTER LOGIC
+    =================================================== */
+    const TOTAL = document.querySelectorAll('.book-item').length;
+
+    function runFilter() {
+      const q    = document.getElementById('searchInput').value.trim().toLowerCase();
+      const cat  = document.getElementById('filterCategoria').value;
+      const disp = document.getElementById('filterDisponibilidad').value;
+      let visible = 0;
+
+      document.querySelectorAll('.book-item').forEach(item => {
+        const title  = item.querySelector('.book-title').textContent.toLowerCase();
+        const author = item.querySelector('.book-author').textContent.toLowerCase();
+        const meta   = item.querySelector('.book-meta').textContent.toLowerCase();
+
+        const okQ    = !q    || title.includes(q) || author.includes(q) || meta.includes(q);
+        const okCat  = !cat  || item.dataset.categoria     === cat;
+        const okDisp = !disp || item.dataset.disponibilidad === disp;
+
+        const show = okQ && okCat && okDisp;
+        item.classList.toggle('d-none', !show);
+        if (show) visible++;
+      });
+
+      document.getElementById('resultsCount').innerHTML =
+        `Mostrando <strong>${visible}</strong> de ${TOTAL} resultados`;
+      document.getElementById('noResults').classList.toggle('d-none', visible > 0);
+      document.getElementById('paginationContainer').classList.toggle('d-none', visible === 0);
+    }
+
+    function resetFilters() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('filterCategoria').value = '';
+      document.getElementById('filterDisponibilidad').value = '';
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      document.querySelector('.filter-chip[data-cat=""]').classList.add('active');
+      runFilter();
+    }
+
+    // Chips
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        document.getElementById('filterCategoria').value = chip.dataset.cat;
+        runFilter();
+      });
+    });
+
+    // Live search / selects
+    document.getElementById('searchInput').addEventListener('input', runFilter);
+    document.getElementById('filterCategoria').addEventListener('change', runFilter);
+    document.getElementById('filterDisponibilidad').addEventListener('change', runFilter);
+    document.getElementById('btnBuscar').addEventListener('click', runFilter);
+    document.getElementById('btnReset').addEventListener('click', resetFilters);
+    document.getElementById('btnResetNo').addEventListener('click', resetFilters);
+
+    /* ===================================================
+       MODAL LOGIC  – populate from data-* attributes
+    =================================================== */
+    document.getElementById('modalLibro').addEventListener('show.bs.modal', event => {
+      const btn = event.relatedTarget;
+      if (!btn) return;
+
+      const d = btn.dataset;
+
+      document.getElementById('modalTitulo').textContent    = d.titulo;
+      document.getElementById('modalAutor').textContent     = '✍️  ' + d.autor;
+      document.getElementById('modalCategoria').textContent = d.cat;
+      document.getElementById('modalISBN').textContent      = 'ISBN: ' + d.isbn + '  ·  ' + d.editorial;
+      document.getElementById('modalDesc').textContent      = d.desc;
+      document.getElementById('modalInfo').textContent      = '📦  ' + d.info;
+      document.getElementById('modalCover').style.background = d.grad;
+
+      const badge    = document.getElementById('modalDisponibilidadBadge');
+      const infoDiv  = document.getElementById('modalInfo');
+      const btnP     = document.getElementById('modalBtnPrestar');
+      const btnR     = document.getElementById('modalBtnReservar');
+
+      if (d.disp === 'Disponible') {
+        badge.className   = 'badge fs-6 px-3 py-2 rounded-pill bg-success';
+        badge.textContent = '● Disponible';
+        infoDiv.className = 'alert alert-success mb-0';
+        btnP.style.display = '';
+        btnR.style.display = 'none';
+      } else if (d.disp === 'Reservado') {
+        badge.className   = 'badge fs-6 px-3 py-2 rounded-pill bg-warning text-dark';
+        badge.textContent = '● Reservado';
+        infoDiv.className = 'alert alert-warning mb-0';
+        btnP.style.display = 'none';
+        btnR.style.display = '';
+      } else {
+        badge.className   = 'badge fs-6 px-3 py-2 rounded-pill bg-danger';
+        badge.textContent = '● No disponible';
+        infoDiv.className = 'alert alert-warning mb-0';
+        btnP.style.display = 'none';
+        btnR.style.display = '';
+      }
+    });
+  </script>
+</body>
+</html>

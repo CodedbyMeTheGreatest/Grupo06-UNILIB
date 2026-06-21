@@ -210,7 +210,7 @@
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
     <div class="container-fluid">
       <a href="/" class="navbar-brand p-0 me-2" title="Icon-only" data-bs-toggle="tooltip" data-bs-placement="bottom">
-        <img src="Logo-removebg-preview.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top"
+        <img src="logo-unilib.png" alt="Logo" width="60" height="60" class="d-inline-block align-text-top"
           style="margin-top: -10px; margin-bottom: -10px;">
       </a>
       <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
@@ -243,33 +243,33 @@
 
       <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
         <li class="nav-item">
-          <a href="#" id="btn-home" class="nav-link active py-3 border-bottom rounded-0" aria-current="page" title="Home"
-            data-bs-toggle="tooltip" data-bs-placement="right">
+          <a href="#" id="btn-home" class="nav-link active py-3 border-bottom rounded-0" aria-current="page"
+            title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
             <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home">
               <use xlink:href="#home"></use>
             </svg>
           </a>
         </li>
         <li>
-          <a href="#" id="btn-prestamos" class="nav-link py-3 border-bottom rounded-0" title="Mis préstamos" data-bs-toggle="tooltip"
-            data-bs-placement="right">
+          <a href="#" id="btn-prestamos" class="nav-link py-3 border-bottom rounded-0" title="Mis préstamos"
+            data-bs-toggle="tooltip" data-bs-placement="right">
             <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Mis préstamos">
               <use xlink:href="#speedometer2"></use>
             </svg>
           </a>
         </li>
         <li>
-          <a href="#" id="btn-reservas" class="nav-link py-3 border-bottom rounded-0" title="Mis reservas" data-bs-toggle="tooltip"
-            data-bs-placement="right">
+          <a href="#" id="btn-reservas" class="nav-link py-3 border-bottom rounded-0" title="Mis reservas"
+            data-bs-toggle="tooltip" data-bs-placement="right">
             <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Mis reservas">
               <use xlink:href="#table"></use>
             </svg>
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link py-3 border-bottom rounded-0" title="Products" data-bs-toggle="tooltip"
+          <a href="#" class="nav-link py-3 border-bottom rounded-0" title="Catálogo" data-bs-toggle="tooltip"
             data-bs-placement="right">
-            <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products">
+            <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Catálogo">
               <use xlink:href="#grid"></use>
             </svg>
           </a>
@@ -415,51 +415,51 @@
   <script src="../assets/dist/js/bootstrap.bundle.min.js" class="astro-vvvwv3sm"></script>
   <script src="offcanvas-navbar.js" class="astro-vvvwv3sm"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
       const btnHome = document.getElementById('btn-home');
       const btnPrestamos = document.getElementById('btn-prestamos');
       const btnReservas = document.getElementById('btn-reservas');
-      
+
       const multaContainer = document.getElementById('multa-container');
       const prestamosContainer = document.getElementById('prestamos-container');
       const reservasContainer = document.getElementById('reservas-container');
 
       function removeActiveClass() {
-        if(btnHome) btnHome.classList.remove('active');
-        if(btnPrestamos) btnPrestamos.classList.remove('active');
-        if(btnReservas) btnReservas.classList.remove('active');
+        if (btnHome) btnHome.classList.remove('active');
+        if (btnPrestamos) btnPrestamos.classList.remove('active');
+        if (btnReservas) btnReservas.classList.remove('active');
       }
 
-      if(btnHome) {
-        btnHome.addEventListener('click', function(e) {
+      if (btnHome) {
+        btnHome.addEventListener('click', function (e) {
           e.preventDefault();
           removeActiveClass();
           btnHome.classList.add('active');
-          if(multaContainer) multaContainer.style.display = 'flex';
-          if(prestamosContainer) prestamosContainer.style.display = 'block';
-          if(reservasContainer) reservasContainer.style.display = 'block';
+          if (multaContainer) multaContainer.style.display = 'flex';
+          if (prestamosContainer) prestamosContainer.style.display = 'block';
+          if (reservasContainer) reservasContainer.style.display = 'block';
         });
       }
 
-      if(btnPrestamos) {
-        btnPrestamos.addEventListener('click', function(e) {
+      if (btnPrestamos) {
+        btnPrestamos.addEventListener('click', function (e) {
           e.preventDefault();
           removeActiveClass();
           btnPrestamos.classList.add('active');
-          if(multaContainer) multaContainer.style.display = 'flex';
-          if(prestamosContainer) prestamosContainer.style.display = 'block';
-          if(reservasContainer) reservasContainer.style.display = 'none';
+          if (multaContainer) multaContainer.style.display = 'flex';
+          if (prestamosContainer) prestamosContainer.style.display = 'block';
+          if (reservasContainer) reservasContainer.style.display = 'none';
         });
       }
 
-      if(btnReservas) {
-        btnReservas.addEventListener('click', function(e) {
+      if (btnReservas) {
+        btnReservas.addEventListener('click', function (e) {
           e.preventDefault();
           removeActiveClass();
           btnReservas.classList.add('active');
-          if(multaContainer) multaContainer.style.display = 'none';
-          if(prestamosContainer) prestamosContainer.style.display = 'none';
-          if(reservasContainer) reservasContainer.style.display = 'block';
+          if (multaContainer) multaContainer.style.display = 'none';
+          if (prestamosContainer) prestamosContainer.style.display = 'none';
+          if (reservasContainer) reservasContainer.style.display = 'block';
         });
       }
     });
