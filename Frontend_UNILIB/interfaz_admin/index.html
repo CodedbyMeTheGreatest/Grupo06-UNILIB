@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="es" data-bs-theme="auto">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="UNILIB – Panel de Administración Técnica. Configuración global de infraestructura, autenticación e integración bibliográfica." />
+  <meta name="author" content="Grupo 06 – UNILIB" />
+  <title>Panel de Administración Técnico · UNILIB</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#1A3A5C" />
+  <style>
+    :root {
+      --unilib-blue: #2E75B6;
+      --unilib-dark: #1A3A5C;
+      --sidebar-w: 4.5rem;
+    }
+
+    * { font-family: 'Inter', sans-serif; }
+    body { background-color: #f0f2f5; overflow-x: hidden; }
+
+    /* ── NAVBAR CORREGIDA CON LOGO OFICIAL ── */
+    .navbar-unilib {
+      background-color: var(--unilib-dark);
+      box-shadow: 0 2px 8px rgba(0,0,0,.3);
+      padding: .5rem 1rem;
+    }
+    .navbar-container-custom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .navbar-brand-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-width: 0;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    .logo-unilib-text {
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: .04em;
+      text-decoration: none;
+      user-select: none;
+    }
+    .nav-user-text {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: .88rem;
+      white-space: normal;
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      padding-left: 1rem;
+    }
+    .role-badge {
+      background: rgba(46, 117, 182, 0.35);
+      color: #93c5fd;
+      border: 1px solid rgba(46, 117, 182, 0.5);
+      border-radius: 20px;
+      padding: .2rem .65rem;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+      white-space: nowrap;
+      display: inline-block;
+      margin-left: .4rem;
+      vertical-align: middle;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: #fff;
+      border-right: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: fixed;
+      top: 56px;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      box-shadow: 2px 0 8px rgba(0,0,0,.06);
+    }
+    .sidebar .nav-pills .nav-link {
+      border-radius: 0;
+      color: #6b7280;
+      padding: .85rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+      border-left: 3px solid transparent;
+    }
+    .sidebar .nav-pills .nav-link:hover {
+      color: var(--unilib-blue);
+      background: #f0f4f8;
+    }
+    .sidebar .nav-pills .nav-link.active {
+      color: var(--unilib-blue);
+      background: #f0f4f8;
+      border-left-color: var(--unilib-blue);
+    }
+    .sidebar .user-area { border-top: 1px solid #e5e7eb; padding: .6rem 0; }
+
+    /* ── MAIN CONTENT ── */
+    .main-content {
+      margin-left: var(--sidebar-w);
+      margin-top: 56px;
+      min-height: calc(100vh - 56px);
+      padding: 1.5rem;
+    }
+
+    /* ── WELCOME BANNER ── */
+    .welcome-banner {
+      background: linear-gradient(135deg, #1A3A5C 0%, #2E75B6 100%);
+      border-radius: 16px;
+      color: #fff;
+      padding: 1.4rem 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      box-shadow: 0 4px 20px rgba(26, 58, 92, 0.2);
+    }
+    .welcome-banner .avatar-circle {
+      width: 56px; height: 56px;
+      background: rgba(255,255,255,.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .welcome-banner h4 { font-size: 1.1rem; font-weight: 700; margin: 0; }
+    .welcome-banner p  { font-size: .83rem; margin: .2rem 0 0; opacity: .8; }
+
+    /* ── PRIVILEGE CARD ── */
+    .privilege-card {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: .8rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      font-size: .83rem;
+      color: #1e3a8a;
+    }
+
+    /* ── SECTION CARDS ── */
+    .section-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+      overflow: hidden;
+    }
+    .section-card .card-header-unilib {
+      padding: .9rem 1.2rem;
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--unilib-dark);
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ── DATA TABLE ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: .88rem;
+    }
+    .data-table th {
+      background-color: #f8fafc;
+      color: var(--unilib-dark);
+      padding: 12px 16px;
+      font-weight: 700;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+      vertical-align: middle;
+    }
+    .data-table tr:hover { background-color: #f9fafb; }
+
+    /* ── PILLS ── */
+    .pill { border-radius: 20px; padding: .22rem .7rem; font-size: .73rem; font-weight: 700; white-space: nowrap; }
+    .pill-vigente   { background: #dcfce7; color: #15803d; }
+
+    /* ── STAT CARDS ── */
+    .stat-card {
+      background: #fff; border-radius: 14px;
+      padding: 1.1rem 1.2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+      display: flex; align-items: center; gap: .9rem;
+    }
+    .stat-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .stat-card .stat-val { font-size: 1.5rem; font-weight: 700; line-height: 1; color: #1e293b; }
+    .stat-card .stat-lbl { font-size: .78rem; color: #9ca3af; margin-top: .15rem; }
+
+    /* ── FORM ELEMENTS ── */
+    .form-label { font-size: .83rem; font-weight: 600; color: #374151; }
+    .form-control, .form-select {
+      border: 2px solid #e5e7eb; border-radius: 10px;
+      font-size: .88rem;
+      transition: border-color .2s;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--unilib-blue);
+      box-shadow: 0 0 0 3px rgba(46, 117, 182, 0.1);
+    }
+    .form-desc { font-size: .77rem; color: #9ca3af; margin-top: .25rem; line-height: 1.4; }
+    
+    .btn-unilib {
+      background: var(--unilib-blue); color: #fff;
+      border: none; border-radius: 10px;
+      font-weight: 600; padding: .55rem 1.3rem;
+      transition: background .2s;
+    }
+    .btn-unilib:hover { background: var(--unilib-dark); color: #fff; }
+
+    .btn-danger-unilib {
+      background: #fee2e2; color: #991b1b;
+      border: 1px solid #fca5a5; border-radius: 8px;
+      padding: .35rem .7rem; font-size: .78rem; font-weight: 600;
+      transition: background .2s;
+    }
+    .btn-danger-unilib:hover { background: #fecaca; }
+
+    .btn-outline-unilib {
+      background: transparent; border: 2px solid #e5e7eb;
+      border-radius: 8px; color: #374151; font-weight: 600;
+      padding: .35rem .7rem; font-size: .78rem;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-outline-unilib:hover { background: #f9fafb; border-color: var(--unilib-blue); }
+
+    /* ── VIEWS ── */
+    .view { display: none; }
+    .view.active { display: block; }
+  </style>
+</head>
+
+<body>
+
+<!-- ===== NAVBAR CON LOGO OFICIAL REFERENCIADO ===== -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark navbar-unilib">
+  <div class="container-fluid">
+    <div class="navbar-container-custom">
+      
+      <!-- Identidad Corporativa: Integración exacta de logo-unilib.png -->
+      <div class="navbar-brand-wrapper">
+        <a href="../menu/index.html" class="logo-container">
+          <img src="logo-unilib.png" alt="Logo UNILIB" class="logo-img" />
+          <span class="logo-unilib-text">UNILIB</span>
+        </a>
+        <div class="nav-user-text">
+          Bienvenido/a: <span class="fw-bold">SEBASTIÁN PINTO SILVA</span>
+          <span class="role-badge">ADMIN TÉCNICO</span>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</nav>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" aria-label="Menú lateral">
+  <ul class="nav nav-pills flex-column mb-auto text-center mt-1" id="sidebarNav">
+    <li class="nav-item">
+      <a href="#" id="btn-inicio" class="nav-link active border-bottom" title="Dashboard">
+        💻
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" id="btn-usuarios" class="nav-link border-bottom" title="Gestión de Cuentas">
+        👥
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" id="btn-configuracion" class="nav-link border-bottom" title="Configuración de Sistemas">
+        ⚙️
+      </a>
+    </li>
+  </ul>
+  <div class="user-area text-center mb-3">
+    <img src="https://ui-avatars.com/api/?name=S+P&background=1A3A5C&color=fff&size=40" alt="Admin" width="32" height="32" class="rounded-circle" />
+  </div>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main-content">
+
+  <!-- VISTA: DASHBOARD -->
+  <div class="view active" id="view-inicio">
+    <div class="welcome-banner mb-4">
+      <div class="avatar-circle">💻</div>
+      <div>
+        <h4>Panel de Infraestructura Técnica UNILIB</h4>
+        <p>Entorno de Producción Integrado · Duoc UC Escuela de Informática</p>
+      </div>
+      <div class="ms-auto text-end d-none d-md-block">
+        <div class="small opacity-75">Última Sincronización LDAP</div>
+        <div class="fw-600" style="font-size:.88rem;">Hoy, 20:15</div>
+      </div>
+    </div>
+
+    <div class="privilege-card mb-4">
+      <span><strong>Auditoría de Seguridad Obligatoria:</strong> Todas las altas y modificaciones de roles quedan retenidas en el registro histórico de logs técnicos durante 1 año, según los requisitos normativos del proyecto.</span>
+    </div>
+
+    <!-- Estadísticas -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-4">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#e0f2fe;">
+            <span style="font-size: 1.2rem;">👥</span>
+          </div>
+          <div>
+            <div class="stat-val">4,520</div>
+            <div class="stat-lbl">Cuentas Activas</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#dcfce7;">
+            <span style="font-size: 1.2rem; color: #15803d;">⚡</span>
+          </div>
+          <div>
+            <div class="stat-val" style="color: #15803d;">ONLINE</div>
+            <div class="stat-lbl">Servicio SSO / LDAP</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#fee2e2;">
+            <span style="font-size: 1.2rem; color: #991b1b;">⚠️</span>
+          </div>
+          <div>
+            <div class="stat-val">0</div>
+            <div class="stat-lbl">Excepciones de API</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISTA: GESTIÓN DE USUARIOS -->
+  <div class="view" id="view-usuarios">
+    <h5 class="fw-bold mb-3" style="color:#1A3A5C;">💻 Gestión de Cuentas Universitarias</h5>
+    
+    <div class="section-card">
+      <div class="card-header-unilib">
+        <span>Control del Ciclo de Vida del Usuario (Evita Cuentas Duplicadas)</span>
+        <button class="btn-unilib btn-sm">+ Registrar Nuevo Usuario</button>
+      </div>
+      
+      <div class="p-3 bg-light border-bottom d-flex gap-2 flex-wrap">
+        <input type="text" class="form-control" placeholder="Buscar por RUT, Nombre o Correo..." style="max-width: 350px;">
+        <select class="form-select" style="max-width: 200px;">
+          <option value="">Todos los Roles</option>
+          <option value="estudiante">Estudiante</option>
+          <option value="docente">Docente</option>
+          <option value="bibliotecario">Bibliotecario</option>
+          <option value="admin">Administrador</option>
+        </select>
+        <button class="btn-unilib">Filtrar</button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Nombre Completo</th>
+              <th>Correo Institucional</th>
+              <th>Rol Asignado</th>
+              <th>Estado de Cuenta</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Jean Lefiman</td>
+              <td>j.lefiman@duocuc.cl</td>
+              <td>Estudiante</td>
+              <td><span class="pill pill-vigente">Activo</span></td>
+              <td>
+                <button class="btn-outline-unilib">Editar</button>
+                <button class="btn-danger-unilib">Bloquear</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Corina Urrutia</td>
+              <td>c.urrutia@duocuc.cl</td>
+              <td>Docente</td>
+              <td><span class="pill pill-vigente">Activo</span></td>
+              <td>
+                <button class="btn-outline-unilib">Editar</button>
+                <button class="btn-danger-unilib">Bloquear</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Manuel Huenchullan</td>
+              <td>m.huenchullan@duocuc.cl</td>
+              <td>Bibliotecario</td>
+              <td><span class="pill pill-vigente">Activo</span></td>
+              <td>
+                <button class="btn-outline-unilib">Editar</button>
+                <button class="btn-danger-unilib">Bloquear</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISTA: CONFIGURACIÓN TÉCNICA -->
+  <div class="view" id="view-configuracion">
+    <h5 class="fw-bold mb-3" style="color:#1A3A5C;">⚙️ Parámetros Globales e Integraciones del Sistema</h5>
+    
+    <div class="section-card">
+      <div class="card-header-unilib">Infraestructura Exclusiva de Administración</div>
+      <div class="p-4">
+        <form onsubmit="return false;" class="row g-4">
+          <div class="col-md-6">
+            <label class="form-label">Endpoint de Autenticación Single Sign-On (SSO / LDAP) *</label>
+            <input type="text" class="form-control" value="https://sso.institucional.cl/auth/v2" />
+            <p class="form-desc">Previene la creación manual de cuentas externas y valida el dominio de correo de la universidad.</p>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Protocolo de Importación Bibliográfica Principal *</label>
+            <select class="form-select">
+              <option value="z3950">Z39.50 (Servidor de Catálogos Automatizados)</option>
+              <option value="oai-pmh">OAI-PMH (Intercambio de Metadatos Extendidos)</option>
+            </select>
+            <p class="form-desc">Define el protocolo de conexión técnica con bases de datos externas de libros.</p>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Seguridad de Acceso</label>
+            <div class="form-check mt-1">
+              <input class="form-check-input" type="checkbox" checked id="mfaCheck">
+              <label class="form-check-label small" for="mfaCheck">
+                Forzar Autenticación Multifactorial (MFA) en el primer inicio de sesión.
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Retención Histórica de Auditorías</label>
+            <select class="form-select">
+              <option>1 Año (Requisito Mínimo del Sistema UNILIB)</option>
+              <option>6 Meses</option>
+            </select>
+          </div>
+          <div class="col-12 border-top pt-3 text-end">
+            <button class="btn-unilib">Guardar Configuración Global</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  function activateView(id) {
+    document.querySelectorAll('#sidebarNav .nav-link').forEach(l => l.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    
+    const link = document.getElementById(id);
+    if (link) link.classList.add('active');
+    
+    const viewId = 'view-' + id.replace('btn-', '');
+    const view = document.getElementById(viewId);
+    if (view) view.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  ['btn-inicio', 'btn-usuarios', 'btn-configuracion'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', e => { e.preventDefault(); activateView(id); });
+  });
+</script>
+</body>
+</html>
