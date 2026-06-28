@@ -4,9 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="UNILIB – Panel de Administración Técnica. Configuración global de infraestructura, autenticación e integración bibliográfica." />
+  <meta name="description"
+    content="UNILIB – Portal del Bibliotecario. Gestión de préstamos, devoluciones, catálogo, usuarios y generación de reportes." />
   <meta name="author" content="Grupo 06 – UNILIB" />
-  <title>Panel de Administración Técnico · UNILIB</title>
+  <title>Portal del Bibliotecario · UNILIB</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <meta name="theme-color" content="#1A3A5C" />
@@ -17,39 +18,50 @@
       --sidebar-w: 4.5rem;
     }
 
-    * { font-family: 'Inter', sans-serif; }
-    body { background-color: #f0f2f5; overflow-x: hidden; }
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #f0f2f5;
+      overflow-x: hidden;
+    }
 
     /* ── NAVBAR CORREGIDA CON LOGO OFICIAL ── */
     .navbar-unilib {
       background-color: var(--unilib-dark);
-      box-shadow: 0 2px 8px rgba(0,0,0,.3);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
       padding: .5rem 1rem;
     }
+
     .navbar-container-custom {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
     }
+
     .navbar-brand-wrapper {
       display: flex;
       align-items: center;
       gap: 1rem;
       min-width: 0;
     }
+
     .logo-container {
       display: flex;
       align-items: center;
       gap: 0.6rem;
       text-decoration: none;
     }
+
     .logo-img {
       width: 40px;
       height: 40px;
       object-fit: contain;
       border-radius: 6px;
     }
+
     .logo-unilib-text {
       color: #ffffff;
       font-weight: 800;
@@ -58,6 +70,7 @@
       text-decoration: none;
       user-select: none;
     }
+
     .nav-user-text {
       color: rgba(255, 255, 255, 0.95);
       font-size: .88rem;
@@ -65,6 +78,7 @@
       border-left: 1px solid rgba(255, 255, 255, 0.2);
       padding-left: 1rem;
     }
+
     .role-badge {
       background: rgba(46, 117, 182, 0.35);
       color: #93c5fd;
@@ -93,8 +107,9 @@
       bottom: 0;
       left: 0;
       z-index: 100;
-      box-shadow: 2px 0 8px rgba(0,0,0,.06);
+      box-shadow: 2px 0 8px rgba(0, 0, 0, .06);
     }
+
     .sidebar .nav-pills .nav-link {
       border-radius: 0;
       color: #6b7280;
@@ -105,16 +120,22 @@
       transition: all .2s;
       border-left: 3px solid transparent;
     }
+
     .sidebar .nav-pills .nav-link:hover {
       color: var(--unilib-blue);
       background: #f0f4f8;
     }
+
     .sidebar .nav-pills .nav-link.active {
       color: var(--unilib-blue);
       background: #f0f4f8;
       border-left-color: var(--unilib-blue);
     }
-    .sidebar .user-area { border-top: 1px solid #e5e7eb; padding: .6rem 0; }
+
+    .sidebar .user-area {
+      border-top: 1px solid #e5e7eb;
+      padding: .6rem 0;
+    }
 
     /* ── MAIN CONTENT ── */
     .main-content {
@@ -135,16 +156,30 @@
       gap: 1.2rem;
       box-shadow: 0 4px 20px rgba(26, 58, 92, 0.2);
     }
+
     .welcome-banner .avatar-circle {
-      width: 56px; height: 56px;
-      background: rgba(255,255,255,.15);
+      width: 56px;
+      height: 56px;
+      background: rgba(255, 255, 255, .15);
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 1.5rem;
       flex-shrink: 0;
     }
-    .welcome-banner h4 { font-size: 1.1rem; font-weight: 700; margin: 0; }
-    .welcome-banner p  { font-size: .83rem; margin: .2rem 0 0; opacity: .8; }
+
+    .welcome-banner h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .welcome-banner p {
+      font-size: .83rem;
+      margin: .2rem 0 0;
+      opacity: .8;
+    }
 
     /* ── PRIVILEGE CARD ── */
     .privilege-card {
@@ -163,9 +198,10 @@
     .section-card {
       background: #fff;
       border-radius: 14px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .06);
       overflow: hidden;
     }
+
     .section-card .card-header-unilib {
       padding: .9rem 1.2rem;
       font-weight: 700;
@@ -184,6 +220,7 @@
       text-align: left;
       font-size: .88rem;
     }
+
     .data-table th {
       background-color: #f8fafc;
       color: var(--unilib-dark);
@@ -191,318 +228,1345 @@
       font-weight: 700;
       border-bottom: 1px solid #e2e8f0;
     }
+
     .data-table td {
       padding: 14px 16px;
       border-bottom: 1px solid #f1f5f9;
       color: #334155;
       vertical-align: middle;
     }
-    .data-table tr:hover { background-color: #f9fafb; }
+
+    .data-table tr:hover {
+      background-color: #f9fafb;
+    }
 
     /* ── PILLS ── */
-    .pill { border-radius: 20px; padding: .22rem .7rem; font-size: .73rem; font-weight: 700; white-space: nowrap; }
-    .pill-vigente   { background: #dcfce7; color: #15803d; }
+    .pill {
+      border-radius: 20px;
+      padding: .22rem .7rem;
+      font-size: .73rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .pill-vigente {
+      background: #dcfce7;
+      color: #15803d;
+    }
 
     /* ── STAT CARDS ── */
     .stat-card {
-      background: #fff; border-radius: 14px;
+      background: #fff;
+      border-radius: 14px;
       padding: 1.1rem 1.2rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,.06);
-      display: flex; align-items: center; gap: .9rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .06);
+      display: flex;
+      align-items: center;
+      gap: .9rem;
     }
+
     .stat-icon {
-      width: 46px; height: 46px;
+      width: 46px;
+      height: 46px;
       border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
-    .stat-card .stat-val { font-size: 1.5rem; font-weight: 700; line-height: 1; color: #1e293b; }
-    .stat-card .stat-lbl { font-size: .78rem; color: #9ca3af; margin-top: .15rem; }
+
+    .stat-card .stat-val {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1;
+      color: #1e293b;
+    }
+
+    .stat-card .stat-lbl {
+      font-size: .78rem;
+      color: #9ca3af;
+      margin-top: .15rem;
+    }
 
     /* ── FORM ELEMENTS ── */
-    .form-label { font-size: .83rem; font-weight: 600; color: #374151; }
-    .form-control, .form-select {
-      border: 2px solid #e5e7eb; border-radius: 10px;
+    .form-label {
+      font-size: .83rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .form-control,
+    .form-select {
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
       font-size: .88rem;
       transition: border-color .2s;
     }
-    .form-control:focus, .form-select:focus {
+
+    .form-control:focus,
+    .form-select:focus {
       border-color: var(--unilib-blue);
       box-shadow: 0 0 0 3px rgba(46, 117, 182, 0.1);
     }
-    .form-desc { font-size: .77rem; color: #9ca3af; margin-top: .25rem; line-height: 1.4; }
-    
+
+    .form-desc {
+      font-size: .77rem;
+      color: #9ca3af;
+      margin-top: .25rem;
+      line-height: 1.4;
+    }
+
     .btn-unilib {
-      background: var(--unilib-blue); color: #fff;
-      border: none; border-radius: 10px;
-      font-weight: 600; padding: .55rem 1.3rem;
+      background: var(--unilib-blue);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      padding: .55rem 1.3rem;
       transition: background .2s;
     }
-    .btn-unilib:hover { background: var(--unilib-dark); color: #fff; }
+
+    .btn-unilib:hover {
+      background: var(--unilib-dark);
+      color: #fff;
+    }
 
     .btn-danger-unilib {
-      background: #fee2e2; color: #991b1b;
-      border: 1px solid #fca5a5; border-radius: 8px;
-      padding: .35rem .7rem; font-size: .78rem; font-weight: 600;
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+      border-radius: 8px;
+      padding: .35rem .7rem;
+      font-size: .78rem;
+      font-weight: 600;
       transition: background .2s;
     }
-    .btn-danger-unilib:hover { background: #fecaca; }
+
+    .btn-danger-unilib:hover {
+      background: #fecaca;
+    }
 
     .btn-outline-unilib {
-      background: transparent; border: 2px solid #e5e7eb;
-      border-radius: 8px; color: #374151; font-weight: 600;
-      padding: .35rem .7rem; font-size: .78rem;
+      background: transparent;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      color: #374151;
+      font-weight: 600;
+      padding: .35rem .7rem;
+      font-size: .78rem;
       transition: border-color .2s, background .2s;
     }
-    .btn-outline-unilib:hover { background: #f9fafb; border-color: var(--unilib-blue); }
+
+    .btn-outline-unilib:hover {
+      background: #f9fafb;
+      border-color: var(--unilib-blue);
+    }
 
     /* ── VIEWS ── */
-    .view { display: none; }
-    .view.active { display: block; }
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
   </style>
 </head>
 
 <body>
 
-<!-- ===== NAVBAR CON LOGO OFICIAL REFERENCIADO ===== -->
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark navbar-unilib">
-  <div class="container-fluid">
-    <div class="navbar-container-custom">
-      
-      <!-- Identidad Corporativa: Integración exacta de logo-unilib.png -->
-      <div class="navbar-brand-wrapper">
-        <a href="../menu/index.html" class="logo-container">
-          <img src="logo-unilib.png" alt="Logo UNILIB" class="logo-img" />
-          <span class="logo-unilib-text">UNILIB</span>
+  <!-- ===== SVG SYMBOLS ===== -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <symbol id="check2" viewBox="0 0 16 16">
+      <path
+        d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+    </symbol>
+    <symbol id="circle-half" viewBox="0 0 16 16">
+      <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+    </symbol>
+    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+      <path
+        d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
+      <path
+        d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162z" />
+    </symbol>
+    <symbol id="sun-fill" viewBox="0 0 16 16">
+      <path
+        d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+    </symbol>
+    <symbol id="icon-home" viewBox="0 0 24 24">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <polyline points="9 22 9 12 15 12 15 22" />
+    </symbol>
+    <symbol id="icon-book" viewBox="0 0 24 24">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+    </symbol>
+    <symbol id="icon-grid" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="7" height="7" />
+      <rect x="14" y="3" width="7" height="7" />
+      <rect x="14" y="14" width="7" height="7" />
+      <rect x="3" y="14" width="7" height="7" />
+    </symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24">
+      <line x1="18" y1="20" x2="18" y2="10" />
+      <line x1="12" y1="20" x2="12" y2="4" />
+      <line x1="6" y1="20" x2="6" y2="14" />
+    </symbol>
+    <symbol id="icon-bell" viewBox="0 0 24 24">
+      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+      <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+    </symbol>
+  </svg>
+
+  <!-- ===== NAVBAR CON LOGO OFICIAL REFERENCIADO ===== -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark navbar-unilib">
+    <div class="container-fluid">
+      <div class="navbar-container-custom">
+
+        <!-- Identidad Corporativa: Integración exacta de logo-unilib.png -->
+        <div class="navbar-brand-wrapper">
+          <a href="../menu/index.html" class="logo-container">
+            <img src="logo-unilib.png" alt="Logo UNILIB" class="logo-img" />
+            <span class="logo-unilib-text">UNILIB</span>
+          </a>
+          <div class="nav-user-text">
+            Bienvenido/a: <span class="fw-bold">MANUEL HUENCHULLÁN PINTO</span>
+            <span class="role-badge"
+              style="background: rgba(46,117,182,0.25); color: #93c5fd; border: 1px solid rgba(46,117,182,0.4);">BIBLIOTECARIO</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" aria-label="Menú lateral">
+    <ul class="nav nav-pills flex-column mb-auto text-center mt-1" id="sidebarNav">
+      <li class="nav-item">
+        <a href="#" id="btn-inicio" class="nav-link active border-bottom" title="Inicio" data-bs-toggle="tooltip"
+          data-bs-placement="right">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <use href="#icon-home"></use>
+          </svg>
         </a>
-        <div class="nav-user-text">
-          Bienvenido/a: <span class="fw-bold">SEBASTIÁN PINTO SILVA</span>
-          <span class="role-badge">ADMIN TÉCNICO</span>
+      </li>
+      <li class="nav-item">
+        <a href="#" id="btn-prestamos" class="nav-link border-bottom" title="Préstamos y Devoluciones"
+          data-bs-toggle="tooltip" data-bs-placement="right">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <use href="#icon-book"></use>
+          </svg>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" id="btn-catalogo" class="nav-link border-bottom" title="Gestión de Catálogo"
+          data-bs-toggle="tooltip" data-bs-placement="right">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <use href="#icon-grid"></use>
+          </svg>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" id="btn-usuarios" class="nav-link border-bottom" title="Gestión de Usuarios"
+          data-bs-toggle="tooltip" data-bs-placement="right">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <use href="#icon-users"></use>
+          </svg>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" id="btn-reportes" class="nav-link border-bottom" title="Generador de Reportes"
+          data-bs-toggle="tooltip" data-bs-placement="right">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <use href="#icon-chart"></use>
+          </svg>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" id="btn-notificaciones" class="nav-link border-bottom" title="Notificaciones"
+          data-bs-toggle="tooltip" data-bs-placement="right">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <use href="#icon-bell"></use>
+          </svg>
+        </a>
+      </li>
+    </ul>
+    <div class="user-area text-center mb-3">
+      <img src="https://ui-avatars.com/api/?name=M+H&background=1A3A5C&color=fff&size=40" alt="Admin" width="32"
+        height="32" class="rounded-circle" />
+    </div>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+
+    <!-- VISTA 1: INICIO (DASHBOARD) -->
+    <div class="view active" id="view-inicio">
+      <div class="welcome-banner mb-4"
+        style="background: linear-gradient(135deg, var(--unilib-dark), #1A4D80); border-radius: 12px; color: white; padding: 1.5rem; display: flex; align-items: center; gap: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <div
+          style="background: rgba(255,255,255,0.2); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
+          📚</div>
+        <div>
+          <h4 class="mb-1 fw-bold">Panel Principal del Bibliotecario</h4>
+          <p class="mb-0 opacity-75">Bienvenido/a al portal de gestión y reportes · Sede Central</p>
+        </div>
+        <div class="ms-auto text-end d-none d-md-block">
+          <div class="small opacity-75">Sistema Bibliográfico Activo</div>
+          <div class="fw-bold" style="font-size: .9rem;">Z39.50 e Integración Automática</div>
         </div>
       </div>
-      
-    </div>
-  </div>
-</nav>
 
-<!-- ===== SIDEBAR ===== -->
-<aside class="sidebar" aria-label="Menú lateral">
-  <ul class="nav nav-pills flex-column mb-auto text-center mt-1" id="sidebarNav">
-    <li class="nav-item">
-      <a href="#" id="btn-inicio" class="nav-link active border-bottom" title="Dashboard">
-        💻
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" id="btn-usuarios" class="nav-link border-bottom" title="Gestión de Cuentas">
-        👥
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" id="btn-configuracion" class="nav-link border-bottom" title="Configuración de Sistemas">
-        ⚙️
-      </a>
-    </li>
-  </ul>
-  <div class="user-area text-center mb-3">
-    <img src="https://ui-avatars.com/api/?name=S+P&background=1A3A5C&color=fff&size=40" alt="Admin" width="32" height="32" class="rounded-circle" />
-  </div>
-</aside>
-
-<!-- ===== MAIN CONTENT ===== -->
-<main class="main-content">
-
-  <!-- VISTA: DASHBOARD -->
-  <div class="view active" id="view-inicio">
-    <div class="welcome-banner mb-4">
-      <div class="avatar-circle">💻</div>
-      <div>
-        <h4>Panel de Infraestructura Técnica UNILIB</h4>
-        <p>Entorno de Producción Integrado · Duoc UC Escuela de Informática</p>
-      </div>
-      <div class="ms-auto text-end d-none d-md-block">
-        <div class="small opacity-75">Última Sincronización LDAP</div>
-        <div class="fw-600" style="font-size:.88rem;">Hoy, 20:15</div>
-      </div>
-    </div>
-
-    <div class="privilege-card mb-4">
-      <span><strong>Auditoría de Seguridad Obligatoria:</strong> Todas las altas y modificaciones de roles quedan retenidas en el registro histórico de logs técnicos durante 1 año, según los requisitos normativos del proyecto.</span>
-    </div>
-
-    <!-- Estadísticas -->
-    <div class="row g-3 mb-4">
-      <div class="col-6 col-md-4">
-        <div class="stat-card">
-          <div class="stat-icon" style="background:#e0f2fe;">
-            <span style="font-size: 1.2rem;">👥</span>
-          </div>
-          <div>
-            <div class="stat-val">4,520</div>
-            <div class="stat-lbl">Cuentas Activas</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-md-4">
-        <div class="stat-card">
-          <div class="stat-icon" style="background:#dcfce7;">
-            <span style="font-size: 1.2rem; color: #15803d;">⚡</span>
-          </div>
-          <div>
-            <div class="stat-val" style="color: #15803d;">ONLINE</div>
-            <div class="stat-lbl">Servicio SSO / LDAP</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="stat-card">
-          <div class="stat-icon" style="background:#fee2e2;">
-            <span style="font-size: 1.2rem; color: #991b1b;">⚠️</span>
-          </div>
-          <div>
-            <div class="stat-val">0</div>
-            <div class="stat-lbl">Excepciones de API</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- VISTA: GESTIÓN DE USUARIOS -->
-  <div class="view" id="view-usuarios">
-    <h5 class="fw-bold mb-3" style="color:#1A3A5C;">💻 Gestión de Cuentas Universitarias</h5>
-    
-    <div class="section-card">
-      <div class="card-header-unilib">
-        <span>Control del Ciclo de Vida del Usuario (Evita Cuentas Duplicadas)</span>
-        <button class="btn-unilib btn-sm">+ Registrar Nuevo Usuario</button>
-      </div>
-      
-      <div class="p-3 bg-light border-bottom d-flex gap-2 flex-wrap">
-        <input type="text" class="form-control" placeholder="Buscar por RUT, Nombre o Correo..." style="max-width: 350px;">
-        <select class="form-select" style="max-width: 200px;">
-          <option value="">Todos los Roles</option>
-          <option value="estudiante">Estudiante</option>
-          <option value="docente">Docente</option>
-          <option value="bibliotecario">Bibliotecario</option>
-          <option value="admin">Administrador</option>
-        </select>
-        <button class="btn-unilib">Filtrar</button>
-      </div>
-
-      <div class="table-responsive">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Nombre Completo</th>
-              <th>Correo Institucional</th>
-              <th>Rol Asignado</th>
-              <th>Estado de Cuenta</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Jean Lefiman</td>
-              <td>j.lefiman@duocuc.cl</td>
-              <td>Estudiante</td>
-              <td><span class="pill pill-vigente">Activo</span></td>
-              <td>
-                <button class="btn-outline-unilib">Editar</button>
-                <button class="btn-danger-unilib">Bloquear</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Corina Urrutia</td>
-              <td>c.urrutia@duocuc.cl</td>
-              <td>Docente</td>
-              <td><span class="pill pill-vigente">Activo</span></td>
-              <td>
-                <button class="btn-outline-unilib">Editar</button>
-                <button class="btn-danger-unilib">Bloquear</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Manuel Huenchullan</td>
-              <td>m.huenchullan@duocuc.cl</td>
-              <td>Bibliotecario</td>
-              <td><span class="pill pill-vigente">Activo</span></td>
-              <td>
-                <button class="btn-outline-unilib">Editar</button>
-                <button class="btn-danger-unilib">Bloquear</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- VISTA: CONFIGURACIÓN TÉCNICA -->
-  <div class="view" id="view-configuracion">
-    <h5 class="fw-bold mb-3" style="color:#1A3A5C;">⚙️ Parámetros Globales e Integraciones del Sistema</h5>
-    
-    <div class="section-card">
-      <div class="card-header-unilib">Infraestructura Exclusiva de Administración</div>
-      <div class="p-4">
-        <form onsubmit="return false;" class="row g-4">
-          <div class="col-md-6">
-            <label class="form-label">Endpoint de Autenticación Single Sign-On (SSO / LDAP) *</label>
-            <input type="text" class="form-control" value="https://sso.institucional.cl/auth/v2" />
-            <p class="form-desc">Previene la creación manual de cuentas externas y valida el dominio de correo de la universidad.</p>
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Protocolo de Importación Bibliográfica Principal *</label>
-            <select class="form-select">
-              <option value="z3950">Z39.50 (Servidor de Catálogos Automatizados)</option>
-              <option value="oai-pmh">OAI-PMH (Intercambio de Metadatos Extendidos)</option>
-            </select>
-            <p class="form-desc">Define el protocolo de conexión técnica con bases de datos externas de libros.</p>
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Seguridad de Acceso</label>
-            <div class="form-check mt-1">
-              <input class="form-check-input" type="checkbox" checked id="mfaCheck">
-              <label class="form-check-label small" for="mfaCheck">
-                Forzar Autenticación Multifactorial (MFA) en el primer inicio de sesión.
-              </label>
+      <!-- Métricas del Bibliotecario -->
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+          <div class="stat-card" style="border-left: 4px solid var(--unilib-blue);">
+            <div class="stat-icon" style="background:#eff6ff;"><svg width="20" height="20" fill="none"
+                stroke="var(--unilib-blue)" stroke-width="2">
+                <use href="#icon-book"></use>
+              </svg></div>
+            <div>
+              <div class="stat-val" id="lbl-prestamos-activos">3</div>
+              <div class="stat-lbl">Préstamos Activos</div>
             </div>
           </div>
-          <div class="col-md-6">
-            <label class="form-label">Retención Histórica de Auditorías</label>
-            <select class="form-select">
-              <option>1 Año (Requisito Mínimo del Sistema UNILIB)</option>
-              <option>6 Meses</option>
-            </select>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card" style="border-left: 4px solid #16a34a;">
+            <div class="stat-icon" style="background:#f0fdf4;"><svg width="20" height="20" fill="none" stroke="#16a34a"
+                stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg></div>
+            <div>
+              <div class="stat-val" id="lbl-devoluciones-hoy">12</div>
+              <div class="stat-lbl">Devoluciones Hoy</div>
+            </div>
           </div>
-          <div class="col-12 border-top pt-3 text-end">
-            <button class="btn-unilib">Guardar Configuración Global</button>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card" style="border-left: 4px solid #ca8a04;">
+            <div class="stat-icon" style="background:#fef9c3;"><svg width="20" height="20" fill="none" stroke="#ca8a04"
+                stroke-width="2">
+                <use href="#icon-grid"></use>
+              </svg></div>
+            <div>
+              <div class="stat-val" id="lbl-total-libros">3</div>
+              <div class="stat-lbl">Libros Registrados</div>
+            </div>
           </div>
-        </form>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card" style="border-left: 4px solid #dc2626;">
+            <div class="stat-icon" style="background:#fef2f2;"><svg width="20" height="20" fill="none" stroke="#dc2626"
+                stroke-width="2">
+                <use href="#icon-bell"></use>
+              </svg></div>
+            <div>
+              <div class="stat-val" id="lbl-alertas-pendientes">2</div>
+              <div class="stat-lbl">Alertas Pendientes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel de Acceso Directo y Novedades -->
+      <div class="row g-3">
+        <div class="col-md-7">
+          <div class="section-card">
+            <div class="card-header-unilib">🛠️ Guía Rápida del Bibliotecario</div>
+            <div class="p-3" style="font-size: .88rem; line-height: 1.6; color: #4b5563;">
+              <p class="mb-2">Como operador de la Biblioteca Central Centralizada, cuentas con los siguientes
+                privilegios:</p>
+              <ul class="mb-0 ps-3">
+                <li><strong>Préstamos:</strong> Registra solicitudes asegurando que la fecha de devolución no coincida
+                  con fines de semana o feriados.</li>
+                <li><strong>Catálogo:</strong> Agrega títulos con metadatos directamente importados vía servidor
+                  Z39.50/OAI-PMH.</li>
+                <li><strong>Reportes:</strong> Genera resúmenes de uso y expórtalos en PDF o Excel/CSV para auditoría
+                  semestral.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="section-card">
+            <div class="card-header-unilib">🔔 Notificaciones del Sistema</div>
+            <div class="p-3" style="font-size: .82rem;" id="dashboard-notifs">
+              <div class="d-flex align-items-center gap-2 mb-2 pb-2 border-bottom text-danger">
+                <span>⚠️</span>
+                <div><strong>Plazo Vencido:</strong> El estudiante Jean Lefiman tiene 1 préstamo vencido.</div>
+              </div>
+              <div class="d-flex align-items-center gap-2 text-warning">
+                <span>🔔</span>
+                <div><strong>Retención:</strong> Corina Urrutia reservó "Meditaciones" (esperando devolución).</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-</main>
+    <!-- VISTA 2: GESTIÓN DE PRÉSTAMOS Y DEVOLUCIONES -->
+    <div class="view" id="view-prestamos">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h5 class="fw-bold mb-0" style="color:#1A3A5C;">📚 Préstamos y Devoluciones Activas</h5>
+        <button class="btn btn-primary btn-sm rounded-pill px-3" data-bs-toggle="modal"
+          data-bs-target="#modalNuevoPrestamo"
+          style="background-color: var(--unilib-blue); border-color: var(--unilib-blue);">
+          + Registrar Nuevo Préstamo
+        </button>
+      </div>
 
-<script>
-  function activateView(id) {
-    document.querySelectorAll('#sidebarNav .nav-link').forEach(l => l.classList.remove('active'));
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    
-    const link = document.getElementById(id);
-    if (link) link.classList.add('active');
-    
-    const viewId = 'view-' + id.replace('btn-', '');
-    const view = document.getElementById(viewId);
-    if (view) view.classList.add('active');
-    window.scrollTo(0, 0);
-  }
+      <div class="section-card">
+        <div class="p-3 bg-light border-bottom d-flex gap-2">
+          <input type="text" id="search-prestamo" class="form-control"
+            placeholder="Buscar por préstamo, RUT o nombre de usuario..." onkeyup="filterPrestamosTables()" />
+          <button class="btn btn-outline-secondary btn-sm" onclick="clearPrestamoFilter()">Limpiar</button>
+        </div>
 
-  ['btn-inicio', 'btn-usuarios', 'btn-configuracion'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('click', e => { e.preventDefault(); activateView(id); });
-  });
-</script>
+        <div class="table-responsive">
+          <table class="data-table" id="table-prestamos-list">
+            <thead>
+              <tr>
+                <th>Usuario (RUT)</th>
+                <th>Libro / ISBN</th>
+                <th>Fecha Préstamo</th>
+                <th>Fecha Devolución</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-prestamos">
+              <!-- Cargado dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MODAL: REGISTRAR PRÉSTAMO -->
+      <div class="modal fade" id="modalNuevoPrestamo" tabindex="-1" aria-labelledby="modalNuevoPrestamoLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header text-white" style="background-color: var(--unilib-dark);">
+              <h5 class="modal-title fw-bold" id="modalNuevoPrestamoLabel">Registrar Nuevo Préstamo</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <form id="form-nuevo-prestamo" onsubmit="handleRegistrarPrestamo(event)">
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label class="form-label">RUT del Usuario *</label>
+                  <input type="text" id="p-usuario-rut" class="form-control" placeholder="12.345.678-9" required />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Nombre del Usuario *</label>
+                  <input type="text" id="p-usuario-nombre" class="form-control" placeholder="Ej: Jean Lefiman"
+                    required />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Libro a Prestar *</label>
+                  <select id="p-libro-select" class="form-select" required>
+                    <!-- Cargado dinámicamente -->
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Fecha de Devolución Estimada *</label>
+                  <input type="date" id="p-fecha-devolucion" class="form-control" required
+                    onchange="validateBusinessDay(this)" />
+                  <div class="form-desc text-danger d-none" id="holiday-warning">
+                    ⚠️ La fecha seleccionada cae en fin de semana o feriado. Se ha ajustado automáticamente al siguiente
+                    día hábil.
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary"
+                  style="background-color: var(--unilib-blue); border-color: var(--unilib-blue);">Confirmar
+                  Registro</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 3: GESTIÓN DE CATÁLOGO -->
+    <div class="view" id="view-catalogo">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h5 class="fw-bold mb-0" style="color:#1A3A5C;">📖 Gestión del Catálogo Bibliográfico</h5>
+        <button class="btn btn-primary btn-sm rounded-pill px-3" data-bs-toggle="modal"
+          data-bs-target="#modalNuevoLibro"
+          style="background-color: var(--unilib-blue); border-color: var(--unilib-blue);">
+          + Agregar Nuevo Libro
+        </button>
+      </div>
+
+      <div class="section-card">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Portada</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>ISBN</th>
+                <th>Editorial / Categoría</th>
+                <th>Stock Copias</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-catalogo">
+              <!-- Cargado dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MODAL: AGREGAR LIBRO -->
+      <div class="modal fade" id="modalNuevoLibro" tabindex="-1" aria-labelledby="modalNuevoLibroLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header text-white" style="background-color: var(--unilib-dark);">
+              <h5 class="modal-title fw-bold" id="modalNuevoLibroLabel">Agregar Libro al Catálogo</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <form id="form-nuevo-libro" onsubmit="handleRegistrarLibro(event)">
+              <div class="modal-body">
+                <div class="mb-3 d-flex justify-content-end">
+                  <button type="button" class="btn btn-link btn-sm text-decoration-none"
+                    onclick="simulateZ3950Import()">
+                    ⚡ Simular Importación Z39.50/OAI-PMH
+                  </button>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">ISBN *</label>
+                  <input type="text" id="l-isbn" class="form-control" placeholder="978-..." required />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Título *</label>
+                  <input type="text" id="l-titulo" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Autor *</label>
+                  <input type="text" id="l-autor" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Editorial *</label>
+                  <input type="text" id="l-editorial" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Categoría *</label>
+                  <input type="text" id="l-categoria" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Stock de Copias Inicial *</label>
+                  <input type="number" id="l-stock" class="form-control" min="1" value="5" required />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary"
+                  style="background-color: var(--unilib-blue); border-color: var(--unilib-blue);">Añadir
+                  Portafolio</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 4: GESTIÓN DE USUARIOS -->
+    <div class="view" id="view-usuarios">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h5 class="fw-bold mb-0" style="color:#1A3A5C;">👥 Gestión de Usuarios y Cuentas</h5>
+        <button class="btn btn-primary btn-sm rounded-pill px-3" data-bs-toggle="modal"
+          data-bs-target="#modalNuevoUsuario"
+          style="background-color: var(--unilib-blue); border-color: var(--unilib-blue);">
+          + Registrar Nuevo Usuario
+        </button>
+      </div>
+
+      <div class="section-card">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Nombre del Usuario</th>
+                <th>Correo Institucional</th>
+                <th>RUT</th>
+                <th>Rol</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-usuarios">
+              <!-- Cargado dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MODAL: REGISTRAR USUARIO -->
+      <div class="modal fade" id="modalNuevoUsuario" tabindex="-1" aria-labelledby="modalNuevoUsuarioLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header text-white" style="background-color: var(--unilib-dark);">
+              <h5 class="modal-title fw-bold" id="modalNuevoUsuarioLabel">Registrar Nuevo Usuario</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <form id="form-nuevo-usuario" onsubmit="handleRegistrarUsuario(event)">
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label class="form-label">Nombre Completo *</label>
+                  <input type="text" id="u-nombre" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">RUT *</label>
+                  <input type="text" id="u-rut" class="form-control" placeholder="12.345.678-9" required />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Correo Institucional *</label>
+                  <input type="email" id="u-email" class="form-control" placeholder="usuario@duocuc.cl" required />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Rol del Usuario *</label>
+                  <select id="u-rol" class="form-select" required>
+                    <option value="Estudiante">Estudiante</option>
+                    <option value="Docente">Docente</option>
+                    <option value="Bibliotecario">Bibliotecario</option>
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary"
+                  style="background-color: var(--unilib-blue); border-color: var(--unilib-blue);">Crear Perfil</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 5: GENERADOR DE REPORTES -->
+    <div class="view" id="view-reportes">
+      <h5 class="fw-bold mb-3" style="color:#1A3A5C;">📊 Generador de Reportes de Gestión</h5>
+
+      <div class="section-card mb-4">
+        <div class="card-header-unilib">Configurar Parámetros de Reporte</div>
+        <div class="p-3">
+          <form onsubmit="handleGenerarReporte(event)" class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">Tipo de Reporte *</label>
+              <select id="r-tipo" class="form-select" required>
+                <option value="1">Libros más prestados por sede</option>
+                <option value="2">Usuarios con mayor actividad</option>
+                <option value="3">Uso mensual del sistema (General)</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Sede Académica</label>
+              <select id="r-sede" class="form-select">
+                <option value="General">Todas las Sedes</option>
+                <option value="Central">Sede Central</option>
+                <option value="Plaza Vespucio">Sede Plaza Vespucio</option>
+                <option value="San Joaquín">Sede San Joaquín</option>
+              </select>
+            </div>
+            <div class="col-md-25 col-6 col-sm-3">
+              <label class="form-label">Fecha Inicio</label>
+              <input type="date" id="r-fecha-inicio" class="form-control" value="2026-06-01" />
+            </div>
+            <div class="col-md-25 col-6 col-sm-3">
+              <label class="form-label">Fecha Fin</label>
+              <input type="date" id="r-fecha-fin" class="form-control" value="2026-06-30" />
+            </div>
+            <div class="col-12 text-end border-top pt-2 mt-2">
+              <button type="submit" class="btn btn-primary"
+                style="background-color: var(--unilib-blue); border-color: var(--unilib-blue);">
+                Generar Reporte Visual
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- RENDER INFORME -->
+      <div class="section-card d-none" id="reporte-resultado-card">
+        <div class="card-header-unilib d-flex justify-content-between align-items-center">
+          <span id="reporte-titulo-generado">Informe Generado</span>
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-danger btn-sm" onclick="exportReportePDF()">PDF</button>
+            <button class="btn btn-outline-success btn-sm" onclick="exportReporteCSV()">Excel / CSV</button>
+          </div>
+        </div>
+        <div class="p-3">
+          <!-- Gráfico SVG Simplificado -->
+          <div class="p-3 mb-4 bg-light rounded text-center border">
+            <h6 class="fw-bold mb-3" style="color:var(--unilib-dark);">Representación Gráfica (Volumen de Movimiento)
+            </h6>
+            <div
+              style="display:flex; justify-content:space-around; align-items:flex-end; height:180px; padding-top:20px;"
+              id="chart-bars-container">
+              <!-- Elementos dinámicos -->
+            </div>
+          </div>
+
+          <!-- Tabla de Datos -->
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead id="reporte-table-head">
+                <!-- Dinámico -->
+              </thead>
+              <tbody id="reporte-table-body">
+                <!-- Dinámico -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 6: NOTIFICACIONES / ALERTAS -->
+    <div class="view" id="view-notificaciones">
+      <h5 class="fw-bold mb-3" style="color:#1A3A5C;">🔔 Notificaciones y Pendientes de Devolución</h5>
+      <div class="section-card">
+        <div class="card-header-unilib d-flex justify-content-between align-items-center">
+          <span>Alertas de Cuenta y Notificaciones Automatizadas (Email / SMS)</span>
+          <button class="btn btn-danger btn-sm" onclick="triggerMassAlerts()">
+            Enviar Alertas a Vencidos
+          </button>
+        </div>
+        <div class="p-3" id="notificaciones-list-container">
+          <!-- Dinámico -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BS BUNDLE -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="offcanvas-navbar.js"></script>
+  <script>
+    // ESTADO LOCAL DE DEMOSTRACIÓN (Mock Database)
+    let usuarios = [
+      { id: 1, nombre: "Jean Lefiman", rut: "19.345.122-3", email: "j.lefiman@duocuc.cl", rol: "Estudiante", estado: "Activo" },
+      { id: 2, nombre: "Corina Urrutia", rut: "12.876.433-2", email: "c.urrutia@duocuc.cl", rol: "Docente", estado: "Activo" },
+      { id: 3, nombre: "Sebastián Pinto", rut: "17.442.991-0", email: "s.pinto@duocuc.cl", rol: "Lector", estado: "Activo" }
+    ];
+
+    let libros = [
+      { id: 1, isbn: "978-84-376-0494-9", titulo: "Meditaciones", autor: "Marco Aurelio", editorial: "Cátedra", categoria: "Filosofía", stock: 3 },
+      { id: 2, isbn: "978-84-206-0000-1", titulo: "Sonetos y Canciones", autor: "Francisco de Quevedo", editorial: "Alianza", categoria: "Poesía", stock: 5 },
+      { id: 3, isbn: "978-84-700-0201-3", titulo: "La Madre", autor: "Máximo Gorki", editorial: "Progreso", categoria: "Novela", stock: 2 }
+    ];
+
+    let prestamos = [
+      { id: 1, usuarioRut: "19.345.122-3", usuarioNombre: "Jean Lefiman", libroTitulo: "Meditaciones", fechaP: "2026-06-15", fechaD: "2026-06-25", estado: "Vencido" },
+      { id: 2, usuarioRut: "12.876.433-2", usuarioNombre: "Corina Urrutia", libroTitulo: "La Madre", fechaP: "2026-06-20", fechaD: "2026-06-30", estado: "Vigente" }
+    ];
+
+    const feriados = [
+      "2026-01-01", "2026-04-03", "2026-04-04", "2026-05-01",
+      "2026-05-21", "2026-06-29", "2026-07-16", "2026-08-15",
+      "2026-09-18", "2026-09-19", "2026-10-12", "2026-11-01",
+      "2026-12-08", "2026-12-25"
+    ];
+
+    // INICIALIZACIÓN
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAll();
+    });
+
+    function renderAll() {
+      renderPrestamosTable();
+      renderLibrosDropdown();
+      renderCatalogoTable();
+      renderUsuariosTable();
+      renderNotificaciones();
+      updateDashboardCounts();
+    }
+
+    // ACTUALIZAR MÉTRICAS
+    function updateDashboardCounts() {
+      document.getElementById('lbl-prestamos-activos').innerText = prestamos.filter(p => p.estado !== 'Devuelto').length;
+      document.getElementById('lbl-total-libros').innerText = libros.length;
+
+      const vencidos = prestamos.filter(p => p.estado === 'Vencido').length;
+      const bloqueados = usuarios.filter(u => u.estado === 'Bloqueado').length;
+      document.getElementById('lbl-alertas-pendientes').innerText = vencidos + bloqueados;
+    }
+
+    // VIEW NAVIGATION
+    function activateView(id) {
+      document.querySelectorAll('#sidebarNav .nav-link').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+
+      const link = document.getElementById(id);
+      if (link) link.classList.add('active');
+
+      const viewId = 'view-' + id.replace('btn-', '');
+      const view = document.getElementById(viewId);
+      if (view) view.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    ['btn-inicio', 'btn-prestamos', 'btn-catalogo', 'btn-usuarios', 'btn-reportes', 'btn-notificaciones'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('click', e => { e.preventDefault(); activateView(id); });
+    });
+
+    // VALIDACIÓN DE FECHAS HÁBILES (EVITAR FERIADOS Y FINES DE SEMANA)
+    function validateBusinessDay(input) {
+      const warningEl = document.getElementById('holiday-warning');
+      if (!input.value) return;
+
+      let date = new Date(input.value + "T12:00:00");
+      let day = date.getDay(); // 0: Dom, 6: Sab
+      let dateStr = input.value;
+
+      let isHoliday = feriados.includes(dateStr);
+      let isWeekend = (day === 0 || day === 6);
+
+      if (isWeekend || isHoliday) {
+        warningEl.classList.remove('d-none');
+        // Recalcular al siguiente día hábil
+        let newDate = new Date(date);
+        while (true) {
+          newDate.setDate(newDate.getDate() + 1);
+          let newDay = newDate.getDay();
+          // Convert to YYYY-MM-DD
+          let y = newDate.getFullYear();
+          let m = String(newDate.getMonth() + 1).padStart(2, '0');
+          let d = String(newDate.getDate()).padStart(2, '0');
+          let checkStr = `${y}-${m}-${d}`;
+
+          if (newDay !== 0 && newDay !== 6 && !feriados.includes(checkStr)) {
+            input.value = checkStr;
+            break;
+          }
+        }
+      } else {
+        warningEl.classList.add('d-none');
+      }
+    }
+
+    // REGISTRAR PRÉSTAMO
+    function handleRegistrarPrestamo(e) {
+      e.preventDefault();
+      const rut = document.getElementById('p-usuario-rut').value.trim();
+      const nombre = document.getElementById('p-usuario-nombre').value.trim();
+      const libroTitulo = document.getElementById('p-libro-select').value;
+      const fechaDev = document.getElementById('p-fecha-devolucion').value;
+
+      // Buscar si el usuario está bloqueado
+      let user = usuarios.find(u => u.rut === rut);
+      if (user && user.estado === 'Bloqueado') {
+        alert("CRITICAL: El usuario está marcado como BLOQUEADO. No se le puede prestar libros.");
+        return;
+      }
+
+      // Crear registro
+      const hoy = new Date().toISOString().split('T')[0];
+      const limitDate = new Date(fechaDev);
+      const isOverdue = limitDate < new Date();
+
+      prestamos.push({
+        id: prestamos.length + 1,
+        usuarioRut: rut,
+        usuarioNombre: nombre,
+        libroTitulo: libroTitulo,
+        fechaP: hoy,
+        fechaD: fechaDev,
+        estado: isOverdue ? "Vencido" : "Vigente"
+      });
+
+      // Si no existe el usuario, agregarlo a la BD
+      if (!user) {
+        usuarios.push({
+          id: usuarios.length + 1,
+          nombre: nombre,
+          rut: rut,
+          email: `${nombre.toLowerCase().replace(/ /g, '.')}@duocuc.cl`,
+          rol: "Estudiante",
+          estado: "Activo"
+        });
+      }
+
+      // Restar stock de libros
+      let bl = libros.find(l => l.titulo === libroTitulo);
+      if (bl && bl.stock > 0) {
+        bl.stock--;
+      }
+
+      // Reset y cerrar
+      document.getElementById('form-nuevo-prestamo').reset();
+      document.getElementById('holiday-warning').classList.add('d-none');
+      bootstrap.Modal.getInstance(document.getElementById('modalNuevoPrestamo')).hide();
+
+      renderAll();
+      alert("Préstamo registrado correctamente.");
+    }
+
+    // REGISTRAR REGRESO / DEVOLUCIÓN
+    function handleDevolucion(prestamoId) {
+      let p = prestamos.find(pr => pr.id === prestamoId);
+      if (p) {
+        p.estado = "Devuelto";
+        // Devolver stock
+        let bl = libros.find(l => l.titulo === p.libroTitulo);
+        if (bl) bl.stock++;
+
+        renderAll();
+        alert(`Devolución de "${p.libroTitulo}" registrada.`);
+      }
+    }
+
+    // TABLA PRÉSTAMOS
+    function renderPrestamosTable() {
+      const tbody = document.getElementById('tbody-prestamos');
+      tbody.innerHTML = '';
+
+      const pFiltrados = prestamos.filter(p => p.estado !== 'Devuelto');
+
+      if (pFiltrados.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">No hay préstamos activos.</td></tr>';
+        return;
+      }
+
+      pFiltrados.forEach(p => {
+        const stateClass = p.estado === 'Vencido' ? 'pill-vencido' : 'pill-vigente';
+        tbody.innerHTML += `
+          <tr data-p-id="${p.id}">
+            <td><strong>${p.usuarioNombre}</strong><br><small class="text-muted">${p.usuarioRut}</small></td>
+            <td><strong>${p.libroTitulo}</strong></td>
+            <td>${p.fechaP}</td>
+            <td>${p.fechaD}</td>
+            <td><span class="pill ${stateClass}">${p.estado}</span></td>
+            <td>
+              <button class="btn btn-success btn-xs" onclick="handleDevolucion(${p.id})">Devolución</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function searchPrestamoTable(query) {
+      const rows = document.querySelectorAll('#table-prestamos-list tbody tr');
+      rows.forEach(row => {
+        let text = row.innerText.toLowerCase();
+        if (text.includes(query.toLowerCase())) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    function filterPrestamosTables() {
+      const query = document.getElementById('search-prestamo').value;
+      searchPrestamoTable(query);
+    }
+
+    function clearPrestamoFilter() {
+      document.getElementById('search-prestamo').value = '';
+      filterPrestamosTables();
+    }
+
+    // DROP-DOWN LIBROS
+    function renderLibrosDropdown() {
+      const select = document.getElementById('p-libro-select');
+      select.innerHTML = '<option value="" disabled selected>Seleccione Libro...</option>';
+      libros.forEach(l => {
+        if (l.stock > 0) {
+          select.innerHTML += `<option value="${l.titulo}">${l.titulo} (Stock: ${l.stock})</option>`;
+        }
+      });
+    }
+
+    // TABLA CATÁLOGO
+    function renderCatalogoTable() {
+      const tbody = document.getElementById('tbody-catalogo');
+      tbody.innerHTML = '';
+
+      libros.forEach(l => {
+        tbody.innerHTML += `
+          <tr>
+            <td>
+              <div style="width:36px; height:46px; border-radius:4px; display:flex; align-items:center; justify-content:center; color:white; font-size:.7rem; font-weight:bold; background:linear-gradient(135deg,#1A3A5C,#2E75B6);">
+                LIB
+              </div>
+            </td>
+            <td><strong>${l.titulo}</strong></td>
+            <td>${l.autor}</td>
+            <td><code>${l.isbn}</code></td>
+            <td><small>Ed: ${l.editorial}</small><br><span class="badge bg-secondary">${l.categoria}</span></td>
+            <td><span class="fw-bold">${l.stock}</span> copias</td>
+            <td>
+              <button class="btn btn-outline-danger btn-xs" onclick="eliminarLibro(${l.id})">Eliminar</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    // SIMULAR IMPORTACIÓN Z39.50
+    function simulateZ3950Import() {
+      const catalogMocks = [
+        { isbn: "978-01-234-5678-9", titulo: "Don Quijote de la Mancha", autor: "Miguel de Cervantes", editorial: "Editorial Castalia", categoria: "Clásico Literature" },
+        { isbn: "978-84-9759-220-8", titulo: "Cien Años de Soledad", autor: "Gabriel García Márquez", editorial: "Sudamericana", categoria: "Novela Realista" },
+        { isbn: "978-07-475-3269-9", titulo: "Harry Potter y la Piedra Filosofal", autor: "J.K. Rowling", editorial: "Salamandra", categoria: "Fantasía" }
+      ];
+
+      const rand = catalogMocks[Math.floor(Math.random() * catalogMocks.length)];
+
+      document.getElementById('l-isbn').value = rand.isbn;
+      document.getElementById('l-titulo').value = rand.titulo;
+      document.getElementById('l-autor').value = rand.autor;
+      document.getElementById('l-editorial').value = rand.editorial;
+      document.getElementById('l-categoria').value = rand.categoria;
+
+      alert("Metadatos cargados con éxito vía Z39.50 (Simulado).");
+    }
+
+    // AGREGAR LIBRO
+    function handleRegistrarLibro(e) {
+      e.preventDefault();
+      const isbn = document.getElementById('l-isbn').value.trim();
+      const titulo = document.getElementById('l-titulo').value.trim();
+      const autor = document.getElementById('l-autor').value.trim();
+      const editorial = document.getElementById('l-editorial').value.trim();
+      const categoria = document.getElementById('l-categoria').value.trim();
+      const stock = parseInt(document.getElementById('l-stock').value);
+
+      libros.push({
+        id: libros.length + 1,
+        isbn: isbn,
+        titulo: titulo,
+        autor: autor,
+        editorial: editorial,
+        categoria: categoria,
+        stock: stock
+      });
+
+      document.getElementById('form-nuevo-libro').reset();
+      bootstrap.Modal.getInstance(document.getElementById('modalNuevoLibro')).hide();
+
+      renderAll();
+      alert(`Libro "${titulo}" añadido exitosamente.`);
+    }
+
+    function eliminarLibro(id) {
+      const l = libros.find(li => li.id === id);
+      if (!l) return;
+
+      const prestado = prestamos.some(p => p.libroTitulo === l.titulo && p.estado !== 'Devuelto');
+      if (prestado) {
+        alert("CRITICAL WARNING: No se puede eliminar el libro del catálogo pues existen solicitudes de préstamos vigentes.");
+        return;
+      }
+
+      libros = libros.filter(li => li.id !== id);
+      renderAll();
+      alert("Libro retirado del catálogo.");
+    }
+
+    // TABLA USUARIOS
+    function renderUsuariosTable() {
+      const tbody = document.getElementById('tbody-usuarios');
+      tbody.innerHTML = '';
+      usuarios.forEach(u => {
+        const estateClass = u.estado === 'Bloqueado' ? 'pill-vencido' : 'pill-vigente';
+        tbody.innerHTML += `
+          <tr>
+            <td><strong>${u.nombre}</strong></td>
+            <td><small><code>${u.email}</code></small></td>
+            <td><code>${u.rut}</code></td>
+            <td>${u.rol}</td>
+            <td><span class="pill ${estateClass}">${u.estado}</span></td>
+            <td>
+              ${u.estado === 'Bloqueado' ?
+            `<button class="btn btn-outline-success btn-xs" onclick="desbloquearUsuario(${u.id})">Desbloquear</button>` :
+            `<button class="btn btn-outline-danger btn-xs" onclick="bloquearUsuario(${u.id})">Bloquear</button>`
+          }
+              <button class="btn btn-outline-secondary btn-xs" onclick="eliminarUsuario(${u.id})">Eliminar</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    // REGISTRAR USUARIO
+    function handleRegistrarUsuario(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('u-nombre').value.trim();
+      const rut = document.getElementById('u-rut').value.trim();
+      const email = document.getElementById('u-email').value.trim();
+      const rol = document.getElementById('u-rol').value;
+
+      usuarios.push({
+        id: usuarios.length + 1,
+        nombre: nombre,
+        rut: rut,
+        email: email,
+        rol: rol,
+        estado: "Activo"
+      });
+
+      document.getElementById('form-nuevo-usuario').reset();
+      bootstrap.Modal.getInstance(document.getElementById('modalNuevoUsuario')).hide();
+
+      renderAll();
+      alert("Cuenta institucional creada.");
+    }
+
+    function bloquearUsuario(id) {
+      const u = usuarios.find(us => us.id === id);
+      if (!u) return;
+
+      const motivo = prompt(`Ingrese motivo para bloquear al usuario ${u.nombre}:`);
+      if (motivo !== null) {
+        if (!motivo.trim()) {
+          alert("Debe indicar un motivo obligatorio.");
+          return;
+        }
+        u.estado = "Bloqueado";
+        u.motivoBloqueo = motivo;
+        renderAll();
+        alert(`Usuario ${u.nombre} ha sido bloqueado: ${motivo}`);
+      }
+    }
+
+    function desbloquearUsuario(id) {
+      const u = usuarios.find(us => us.id === id);
+      if (u) {
+        u.estado = "Activo";
+        delete u.motivoBloqueo;
+        renderAll();
+        alert(`Usuario ${u.nombre} reactivado.`);
+      }
+    }
+
+    function eliminarUsuario(id) {
+      const u = usuarios.find(us => us.id === id);
+      if (u && confirm(`¿Desea eliminar la cuenta de ${u.nombre}?`)) {
+        usuarios = usuarios.filter(us => us.id !== id);
+        renderAll();
+        alert("Usuario eliminado.");
+      }
+    }
+
+    // REPORT GENERATOR - REQUISITOS RF-12, RF-13, RF-14
+    let datosUltimoReporte = null;
+    let tipoUltimoReporte = "";
+
+    function handleGenerarReporte(e) {
+      e.preventDefault();
+      const tipo = document.getElementById('r-tipo').value;
+      const sede = document.getElementById('r-sede').value;
+
+      document.getElementById('reporte-resultado-card').classList.remove('d-none');
+
+      const barsContainer = document.getElementById('chart-bars-container');
+      const tableHead = document.getElementById('reporte-table-head');
+      const tableBody = document.getElementById('reporte-table-body');
+
+      barsContainer.innerHTML = '';
+      tableHead.innerHTML = '';
+      tableBody.innerHTML = '';
+
+      if (tipo === "1") {
+        // Libros más prestados por sede
+        tipoUltimoReporte = "Libros más prestados";
+        document.getElementById('reporte-titulo-generado').innerText = `Reporte: Demanda de Portafolios Bibliográficos · Sede: ${sede}`;
+
+        datosUltimoReporte = [
+          { item: "Meditaciones", valor: 45, extra: "Filosofía" },
+          { item: "Sonetos y Canciones", valor: 28, extra: "Poesía" },
+          { item: "La Madre", valor: 19, extra: "Novela" },
+          { item: "Introducción a los Algoritmos", valor: 14, extra: "Tecnología" }
+        ];
+
+        tableHead.innerHTML = `
+          <tr>
+            <th>Libro Titular</th>
+            <th>Categoría</th>
+            <th>Nº de Préstamos Registrados</th>
+          </tr>
+        `;
+
+        datosUltimoReporte.forEach(d => {
+          tableBody.innerHTML += `
+            <tr>
+              <td><strong>${d.item}</strong></td>
+              <td>${d.extra}</td>
+              <td class="fw-bold text-primary">${d.valor} veces</td>
+            </tr>
+          `;
+
+          createChartBar(d.item, d.valor, 45, barsContainer);
+        });
+
+      } else if (tipo === "2") {
+        // Usuarios más activos
+        tipoUltimoReporte = "Usuarios más activos";
+        document.getElementById('reporte-titulo-generado').innerText = `Reporte: Log de Actividad Académica · Sede: ${sede}`;
+
+        datosUltimoReporte = [
+          { item: "Jean Lefiman", valor: 16, extra: "j.lefiman@duocuc.cl (Estudiante)" },
+          { item: "Corina Urrutia", valor: 12, extra: "c.urrutia@duocuc.cl (Docente)" },
+          { item: "Manuel Huenchullán", valor: 8, extra: "m.huenchullan@duocuc.cl (Bibliotecario)" }
+        ];
+
+        tableHead.innerHTML = `
+          <tr>
+            <th>Nombre del Usuario</th>
+            <th>Contacto Institucional</th>
+            <th>Transacciones Totales</th>
+          </tr>
+        `;
+
+        datosUltimoReporte.forEach(d => {
+          tableBody.innerHTML += `
+            <tr>
+              <td><strong>${d.item}</strong></td>
+              <td><code>${d.extra}</code></td>
+              <td class="fw-bold text-success">${d.valor} transacciones</td>
+            </tr>
+          `;
+
+          createChartBar(d.item, d.valor, 16, barsContainer);
+        });
+
+      } else {
+        // Métricas de uso mensual
+        tipoUltimoReporte = "Uso mensual";
+        document.getElementById('reporte-titulo-generado').innerText = `Reporte: Evolución Mensual general de Uso · Sede: ${sede}`;
+
+        datosUltimoReporte = [
+          { item: "Marzo 2026", valor: 120, extra: "Inicio Semestre" },
+          { item: "Abril 2026", valor: 145, extra: "Fase de Certámenes" },
+          { item: "Mayo 2026", valor: 180, extra: "Entrega de Proyectos" },
+          { item: "Junio 2026", valor: 95, extra: "Periodo Actual" }
+        ];
+
+        tableHead.innerHTML = `
+          <tr>
+            <th>Mes Evaluado</th>
+            <th>Hito Operacional</th>
+            <th>Volumen Operacional Total</th>
+          </tr>
+        `;
+
+        datosUltimoReporte.forEach(d => {
+          tableBody.innerHTML += `
+            <tr>
+              <td><strong>${d.item}</strong></td>
+              <td>${d.extra}</td>
+              <td class="fw-bold text-warning">${d.valor} acciones</td>
+            </tr>
+          `;
+
+          createChartBar(d.item, d.valor, 180, barsContainer);
+        });
+      }
+    }
+
+    function createChartBar(label, val, maxVal, container) {
+      let percent = Math.round((val / maxVal) * 100);
+      let bar = document.createElement('div');
+      bar.style.display = 'flex';
+      bar.style.flexDirection = 'column';
+      bar.style.alignItems = 'center';
+      bar.style.width = '70px';
+
+      bar.innerHTML = `
+        <span class="small fw-bold mb-1">${val}</span>
+        <div style="width: 28px; height: ${percent * 1.2}px; border-radius: 4px 4px 0 0; background: linear-gradient(0deg, var(--unilib-dark), var(--unilib-blue)); min-height: 5px;"></div>
+        <span class="small text-muted mt-2 text-center" style="font-size:.65rem; word-break:break-all; max-height:30px; overflow:hidden;" title="${label}">${label}</span>
+      `;
+      container.appendChild(bar);
+    }
+
+    // EXPORTACIÓN A EXCEL / CSV
+    function exportReporteCSV() {
+      if (!datosUltimoReporte) return;
+
+      let csv = "Item,Valor,Extra\n";
+      datosUltimoReporte.forEach(d => {
+        csv += `"${d.item}",${d.valor},"${d.extra}"\n`;
+      });
+
+      let blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      let link = document.createElement("a");
+      let url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", `reporte_${tipoUltimoReporte.toLowerCase().replace(/ /g, '_')}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // EXPORTACIÓN A PDF (SIMULADO VÍA VENTANA DE IMPRESIÓN)
+    function exportReportePDF() {
+      window.print();
+    }
+
+    // AVISOS Y ALERTAS DE NOTIFICACIÓN
+    function renderNotificaciones() {
+      const container = document.getElementById('notificaciones-list-container');
+      container.innerHTML = '';
+
+      const vencidos = prestamos.filter(p => p.estado === 'Vencido');
+
+      if (vencidos.length === 0) {
+        container.innerHTML = '<div class="alert alert-success">No hay alarmas pendientes de devolución. Todo está al día.</div>';
+        return;
+      }
+
+      vencidos.forEach(v => {
+        container.innerHTML += `
+          <div class="alert d-flex align-items-center justify-content-between p-3 mb-2" style="background:#fee2e2; border:1px solid #fca5a5; border-radius:8px;">
+            <div>
+              <strong class="text-danger">Aviso de Vencimiento de Libro</strong><br>
+              El usuario <strong>${v.usuarioNombre}</strong> (${v.usuarioRut}) no ha devuelto el libro "<strong>${v.libroTitulo}</strong>" vencido el día <strong>${v.fechaD}</strong>.
+            </div>
+            <button class="btn btn-sm btn-outline-danger" onclick="sendIndividualNotification('${v.usuarioNombre}', '${v.libroTitulo}')">Notificar</button>
+          </div>
+        `;
+      });
+    }
+
+    function sendIndividualNotification(user, book) {
+      alert(`Mensaje de cobro enviado por Correo Universitario a ${user} solicitando la devolución de "${book}" y advirtiendo multas.`);
+    }
+
+    function triggerMassAlerts() {
+      alert("Ejecutando servicio cron daemon. Todos los lectores con libros retenidos o vencidos han recibido la correspondiente carta de notificación automatizada.");
+    }
+  </script>
 </body>
+
 </html>
