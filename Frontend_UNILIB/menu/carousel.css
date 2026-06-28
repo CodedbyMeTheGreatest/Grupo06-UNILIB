@@ -1,69 +1,165 @@
-/* GLOBAL STYLES
--------------------------------------------------- */
-/* Padding below the footer and lighter body text */
+/* ==============================================
+   UNILIB — carousel.css
+   Paleta institucional y estilos del landing
+   ============================================== */
+
+/* --- Variables CSS institucionales --- */
+:root {
+  --unilib-primary:   #1A3A5C;
+  --unilib-secondary: #2E75B6;
+  --unilib-bg:        #FFFFFF;
+  --unilib-panel:     #F5F5F5;
+  --unilib-text:      #333333;
+  --unilib-success:   #1FFF26;
+  --unilib-danger:    #C0392B;
+  --unilib-warning:   #EDF723;
+  --unilib-footer-divider: rgba(255, 255, 255, 0.2);
+}
+
+/* ==============================================
+   GLOBAL
+   ============================================== */
 
 body {
   padding-top: 3rem;
-  padding-bottom: 3rem;
-  color: rgb(var(--bs-tertiary-color-rgb));
+  color: var(--unilib-text);
+  background-color: var(--unilib-bg);
 }
 
+/* ==============================================
+   NAVBAR
+   ============================================== */
 
-/* CUSTOMIZE THE CAROUSEL
--------------------------------------------------- */
+.unilib-navbar {
+  background-color: var(--unilib-primary) !important;
+}
 
-/* Carousel base class */
+/* ==============================================
+   BOTONES UNILIB
+   ============================================== */
+
+.btn-unilib {
+  background-color: var(--unilib-secondary);
+  border-color:     var(--unilib-secondary);
+  color:            #ffffff;
+  font-weight:      600;
+}
+
+.btn-unilib:hover,
+.btn-unilib:focus {
+  background-color: #2461a0;
+  border-color:     #2461a0;
+  color:            #ffffff;
+}
+
+.btn-unilib:active {
+  background-color: #1d4f85;
+  border-color:     #1d4f85;
+}
+
+/* ==============================================
+   CAROUSEL
+   ============================================== */
+
 .carousel {
   margin-bottom: 4rem;
 }
-/* Since positioning the image, we need to help out the caption */
+
+.carousel-img {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
 .carousel-caption {
   bottom: 3rem;
   z-index: 10;
 }
 
-/* Declare heights because of positioning of img element */
-.carousel-item {
-  height: 32rem;
-}
+/* ==============================================
+   MARKETING — FEATURES
+   ============================================== */
 
-
-/* MARKETING CONTENT
--------------------------------------------------- */
-
-/* Center align the text within the three columns below the carousel */
 .marketing .col-lg-4 {
   margin-bottom: 1.5rem;
   text-align: center;
 }
-/* rtl:begin:ignore */
+
 .marketing .col-lg-4 p {
   margin-right: .75rem;
-  margin-left: .75rem;
+  margin-left:  .75rem;
 }
-/* rtl:end:ignore */
 
+/* Iconos circulares de feature */
+.feature-icon {
+  width:            80px;
+  height:           80px;
+  background-color: var(--unilib-secondary);
+  border-radius:    50%;
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  transition:       transform 0.3s ease;
+}
 
-/* Featurettes
-------------------------- */
+.feature-icon:hover {
+  transform: scale(1.1);
+}
+
+/* ==============================================
+   FEATURETTES
+   ============================================== */
 
 .featurette-divider {
-  margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+  margin: 5rem 0;
 }
 
-/* Thin out the marketing headings */
-/* rtl:begin:remove */
 .featurette-heading {
   letter-spacing: -.05rem;
 }
 
-/* rtl:end:remove */
+.featurette-image {
+  display: block;
+}
 
-/* RESPONSIVE CSS
--------------------------------------------------- */
+/* ==============================================
+   SECCIÓN MÉTRICAS
+   ============================================== */
+
+.metrics {
+  background-color: var(--unilib-primary);
+  color: #ffffff;
+}
+
+/* ==============================================
+   FOOTER
+   ============================================== */
+
+.unilib-footer {
+  background-color: var(--unilib-primary);
+  color: #ffffff;
+}
+
+.footer-divider {
+  border-color: var(--unilib-footer-divider);
+}
+
+.unilib-footer a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.unilib-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ==============================================
+   RESPONSIVE
+   ============================================== */
 
 @media (min-width: 40em) {
-  /* Bump up size of carousel content */
   .carousel-caption p {
     margin-bottom: 1.25rem;
     font-size: 1.25rem;
@@ -81,42 +177,6 @@ body {
   }
 }
 
-/* Paleta institucional UNILIB */
-:root {
-  --unilib-primary: #1A3A5C;      /* Azul marino */
-  --unilib-secondary: #2E75B6;    /* Azul botones */
-  --unilib-bg: #FFFFFF;             /* Fondo general */
-  --unilib-panel: #F5F5F5;        /* Paneles secundarios */
-  --unilib-success: #1FFF26;      /* Éxito */
-  --unilib-danger: #C0392B;       /* Error/Alerta */
-  --unilib-warning: #EDF723;      /* Advertencia */
-}
-
-/* Navbar institucional */
-.navbar-dark.bg-dark {
-  background-color: var(--unilib-primary) !important;
-}
-
-/* Botones primarios */
-.btn-primary {
-  background-color: var(--unilib-secondary);
-  border-color: var(--unilib-secondary);
-}
-
-/* Feature icons */
-.feature-icon {
-  transition: transform 0.3s ease;
-}
-.feature-icon:hover {
-  transform: scale(1.1);
-}
-
-/* Accesibilidad: contraste mínimo 4.5:1 */
-body {
-  color: #333; /* Buen contraste sobre blanco */
-}
-
-/* Responsividad mínima 360px */
 @media (max-width: 360px) {
   .carousel-caption h1 {
     font-size: 1.5rem;
