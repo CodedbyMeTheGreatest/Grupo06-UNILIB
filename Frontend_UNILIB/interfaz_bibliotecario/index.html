@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-bs-theme="auto">
+<html lang="es" data-bs-theme="light">
 
 <head>
   <meta charset="utf-8" />
@@ -505,9 +505,18 @@
         </a>
       </li>
     </ul>
-    <div class="user-area text-center mb-3">
+    <div class="user-area dropdown dropup text-center">
+      <a href="#" class="d-flex align-items-center justify-content-center p-3 text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
       <img src="https://ui-avatars.com/api/?name=M+H&background=1A3A5C&color=fff&size=40" alt="Admin" width="32"
         height="32" class="rounded-circle" />
+      </a>
+      <ul class="dropdown-menu text-small shadow">
+        <li><a class="dropdown-item" href="#">Mis solicitudes</a></li>
+        <li><a class="dropdown-item" href="#">Configuración</a></li>
+        <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+        <li><hr class="dropdown-divider" /></li>
+        <li><a class="dropdown-item text-danger" href="../menu/index.html">Cerrar sesión</a></li>
+      </ul>      
     </div>
   </aside>
 
@@ -527,7 +536,7 @@
         </div>
         <div class="ms-auto text-end d-none d-md-block">
           <div class="small opacity-75">Sistema Bibliográfico Activo</div>
-          <div class="fw-bold" style="font-size: .9rem;">Z39.50 e Integración Automática</div>
+          <div class="fw-bold" style="font-size: .9rem;">Integración Automática</div>
         </div>
       </div>
 
@@ -594,8 +603,7 @@
               <ul class="mb-0 ps-3">
                 <li><strong>Préstamos:</strong> Registra solicitudes asegurando que la fecha de devolución no coincida
                   con fines de semana o feriados.</li>
-                <li><strong>Catálogo:</strong> Agrega títulos con metadatos directamente importados vía servidor
-                  Z39.50/OAI-PMH.</li>
+                <li><strong>Catálogo:</strong> Agrega títulos con metadatos directamente importados vía servidor.</li>
                 <li><strong>Reportes:</strong> Genera resúmenes de uso y expórtalos en PDF o Excel/CSV para auditoría
                   semestral.</li>
               </ul>
@@ -642,8 +650,8 @@
           <table class="data-table" id="table-prestamos-list">
             <thead>
               <tr>
-                <th>Usuario (RUT)</th>
-                <th>Libro / ISBN</th>
+                <th>Nombre y RUT del Usuario </th>
+                <th>Título del Libro</th>
                 <th>Fecha Préstamo</th>
                 <th>Fecha Devolución</th>
                 <th>Estado</th>
@@ -753,7 +761,7 @@
                 <div class="mb-3 d-flex justify-content-end">
                   <button type="button" class="btn btn-link btn-sm text-decoration-none"
                     onclick="simulateZ3950Import()">
-                    ⚡ Simular Importación Z39.50/OAI-PMH
+                    ⚡ Ímportar Metadatos
                   </button>
                 </div>
                 <div class="mb-3">
@@ -952,7 +960,7 @@
       <h5 class="fw-bold mb-3" style="color:#1A3A5C;">🔔 Notificaciones y Pendientes de Devolución</h5>
       <div class="section-card">
         <div class="card-header-unilib d-flex justify-content-between align-items-center">
-          <span>Alertas de Cuenta y Notificaciones Automatizadas (Email / SMS)</span>
+          <span>Alertas de Cuenta y Notificaciones Automatizadas</span>
           <button class="btn btn-danger btn-sm" onclick="triggerMassAlerts()">
             Enviar Alertas a Vencidos
           </button>
