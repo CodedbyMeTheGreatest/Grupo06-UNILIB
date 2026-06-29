@@ -1,25 +1,26 @@
 html,
-body {
-  height: 100%;
+body{
+    min-height: 100vh;
+    background-color: #212529;
 }
 
-.form-signin {
-  max-width: 330px;
-  padding: 1rem;
+.form-signin{
+    max-width: 430px;
+    padding: 2.5rem;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
 
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
 
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+.btn-primary{
+    height:48px;
+    font-weight:600;
 }
 
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+#formulario,
+#mensajeExito{
+    transition: opacity .35s ease;
 }

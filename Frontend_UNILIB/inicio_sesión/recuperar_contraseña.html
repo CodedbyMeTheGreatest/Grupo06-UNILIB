@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es" data-bs-theme="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recuperar contraseña</title>
+
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="sign-in.css" rel="stylesheet">
+</head>
+
+<body class="d-flex align-items-center py-4 bg-body-tertiary">
+
+<main class="form-signin w-100 m-auto">
+
+    <!-- Formulario -->
+    <div id="formulario">
+
+    <img
+        src="logo-unilib.png"
+        alt="UNILIB"
+        class="d-block mx-auto mb-3"
+        width="250">
+
+    <h1 class="h4 login-title text-center mb-3">
+        Recuperar Contraseña
+    </h1>
+
+    <p class="text-body-secondary text-center mb-4">
+        Ingrese su correo institucional para recibir un enlace de recuperación de contraseña.
+    </p>
+
+        <div class="form-floating mb-3">
+
+            <input
+                type="email"
+                class="form-control"
+                id="correo"
+                placeholder="Correo">
+
+            <label for="correo">
+                Correo electrónico
+            </label>
+
+            <div class="invalid-feedback">
+                Ingrese un correo válido.
+            </div>
+
+        </div>
+
+        <button
+            class="btn btn-primary w-100 py-2"
+            type="button"
+            id="btnEnviar">
+
+            Enviar enlace
+
+        </button>
+
+        <div class="text-center mt-3">
+
+            <a href="index.html">
+                Volver al inicio de sesión
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Mensaje de éxito -->
+
+    <div id="mensajeExito" class="text-center d-none">
+
+        <img
+            src="logo-unilib.png"
+            alt="UNILIB"
+            class="d-block mx-auto mb-1"
+            width="220">
+
+        <div class="display-5 text-success mb-4">
+            ✓
+        </div>
+
+        <h2 class="h4 login-title mb-4">
+            Correo enviado correctamente
+        </h2>
+
+        <p class="text-body-secondary mb-4">
+            Si el correo pertenece a una cuenta existente, le llegará un enlace de recuperación a su correo institucional.
+        </p>
+
+        <div class="mt-4">
+            <a href="index.html" class="text-decoration-none">
+                ← Volver al inicio de sesión
+            </a>
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+
+const correoInput = document.getElementById("correo");
+const boton = document.getElementById("btnEnviar");
+
+const formulario = document.getElementById("formulario");
+const mensaje = document.getElementById("mensajeExito");
+
+boton.addEventListener("click", function () {
+
+    correoInput.classList.remove("is-invalid");
+
+    const correo = correoInput.value.trim();
+
+    const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!correoValido.test(correo)) {
+        correoInput.classList.add("is-invalid");
+        return;
+    }
+
+    // Desvanecer formulario
+    formulario.style.opacity = "0";
+
+    setTimeout(() => {
+
+        formulario.classList.add("d-none");
+
+        mensaje.classList.remove("d-none");
+
+        mensaje.style.opacity = "0";
+
+        requestAnimationFrame(() => {
+            mensaje.style.opacity = "1";
+        });
+
+    }, 300);
+
+});
+
+</script>
+
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
