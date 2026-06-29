@@ -228,10 +228,6 @@
             <li class="nav-item"><a class="nav-link" href="#">Préstamos</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Reservas</a></li>
           </ul>
-          <a href="../menu/index.html#login" class="btn btn-primary me-2"
-            style="background-color:#2E75B6; border-color:#2E75B6;">
-            Acceder con Cuenta Institucional
-          </a>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" />
             <button class="btn btn-outline-success d-flex align-items-center justify-content-center" type="submit"
@@ -852,6 +848,18 @@
         btnR.style.display = '';
       }
     });
+      
+        // ===== LEER PARÁMETRO DE BÚSQUEDA DESDE LA URL =====
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('q');
+      if (q) {
+        const searchInput = document.getElementById('searchInput');
+        searchInput.value = q;
+        // Ejecutar el filtro automáticamente
+        runFilter();
+      }
+    })();
   </script>
 </body>
 </html>
