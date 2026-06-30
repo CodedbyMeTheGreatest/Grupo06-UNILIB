@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="" />
   <meta name="author" content="Grupo 06 – UNILIB" />
-  <meta name="generator" content="Astro v5.13.2" />
-  <title>Signin Template · Bootstrap v5.3</title>
+  <title>Inicio Sesión · UNILIB</title>
   <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/" />
   <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
   <meta name="theme-color" content="#712cf9" />
@@ -137,6 +136,29 @@
     <p class="text-body-secondary text-center mb-4">
         Ingrese sus credenciales institucionales para acceder al Sistema de Gestión Bibliotecaria UNILIB.
     </p>
+
+
+    <div class="d-flex gap-2 mb-4">
+    
+        <button type="button" class="btn btn-primary flex-fill perfil-btn" id="btnEstudiante">
+            Estudiante
+        </button>
+      
+        <button type="button" class="btn btn-primary flex-fill perfil-btn" id="btnBibliotecario">
+            Bibliotecario
+        </button>
+      
+        <button type="button" class="btn btn-primary flex-fill perfil-btn" id="btnDocente">
+            Docente
+        </button>
+      
+    </div>
+
+    <div id="perfilError" class="text-danger text-center small mb-3 d-none">
+        Debe seleccionar un perfil.
+    </div>
+
+
       <div class="form-floating mb-3">
         <input
             type="email"
@@ -175,6 +197,28 @@
     </form>
   </main>
   <script>
+  let perfilSeleccionado = null;
+
+  const botonesPerfil = document.querySelectorAll(".perfil-btn");
+
+  botonesPerfil.forEach(boton => {
+
+      boton.addEventListener("click", () => {
+
+          botonesPerfil.forEach(b => b.classList.remove("active"));
+          boton.classList.add("active");
+
+          if (boton.id === "btnEstudiante") {
+              perfilSeleccionado = "estudiante";
+          } else if (boton.id === "btnBibliotecario") {
+              perfilSeleccionado = "bibliotecario";
+          } else if (boton.id === "btnDocente") {
+              perfilSeleccionado = "docente";
+          }
+
+      });
+
+  });
 
   const boton = document.getElementById("btnLogin");
 
@@ -189,6 +233,14 @@
 
       const correo = correoInput.value;
       const password = passwordInput.value;
+
+      const perfilError = document.getElementById("perfilError");
+      perfilError.classList.add("d-none");
+
+      if (perfilSeleccionado === null) {
+          perfilError.classList.remove("d-none");
+          valido = false;
+      }
 
       let valido = true;
 
@@ -209,8 +261,23 @@
           return;
       }
 
-      window.location.href = "../Catálogo/index.html";
+      // Redirigir según el perfil seleccionado
 
+      switch (perfilSeleccionado) {
+      
+          case "estudiante":
+              window.location.href = "../interfaz_estudiante/index.html";
+              break;
+      
+          case "bibliotecario":
+              window.location.href = "../interfaz_bibliotecario/index.html";
+              break;
+      
+          case "docente":
+              window.location.href = "../interfaz_docente/index.html";
+              break;
+      }
+      
   });
 
   </script>

@@ -24,3 +24,14 @@ body{
 #mensajeExito{
     transition: opacity .35s ease;
 }
+
+.perfil-btn{
+    height:48px;
+    font-weight:600;
+    opacity:.45;
+    transition:.2s;
+}
+
+.perfil-btn.active{
+    opacity:1;
+}
